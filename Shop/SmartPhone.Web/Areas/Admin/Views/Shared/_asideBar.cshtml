@@ -1,0 +1,235 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var session = HttpContextAccessor.HttpContext.Session.GetString("User");
+    var user = new SmartPhone.Models.EF.Account();
+    if (session != null)
+    {
+        user = JsonConvert.DeserializeObject<SmartPhone.Models.EF.Account>(session);
+    }
+}
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/Admin" class="brand-link">
+        <img src="/Admin/Content/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text font-weight-light">Quản trị hệ thống</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="@user.Image" class="img-circle elevation-2 upload-img" alt="User Image">
+                <!--box camera-->
+                <div class="dropright position-absolute box-camera" data-show-camera="0" id="show_camera">
+
+                    <button type="button" id="dropdownMenuButton"> <i class="fas fa-camera"></i></button>
+                </div>
+                <div class="dropdown-menu-camera display d-none">
+                    <a class="dropdown-item" href="#">Xem ảnh</a>
+                    <label class="dropdown-item" for="fileUpload">Tải ảnh lên</label>
+                    <input type="file" value="" id="fileUpload" style="display:none" />
+                </div>
+            </div>
+            <div class="info w-100">
+                @if (user != null)
+                {
+                    <a href="#" class="d-block">@user.Name</a>
+                    if (user.IsAdmin == 1)
+                    {
+                        <a href="#" class="online"><i class="fa fa-circle text-success"></i>Admin</a>
+                    }
+                    else
+                    {
+                        <a href="#" class="online"><i class="fa fa-circle text-success"></i>Nhân viên</a>
+                    }
+
+                }
+            </div>
+            <div class="logout" style="margin:18px 10px 0 0">
+                @using (Html.BeginForm("Logout", "Admin", FormMethod.Post, new { id = "LogoutAdmin" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="javascript:document.getElementById('LogoutAdmin').submit()" class="right">
+                        <span class="right badge badge-danger" style="font-size:12px;">Đăng xuất</span>
+                    </a>
+                }
+            </div>
+
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                <li class="nav-item ">
+                    <a href="/Admin" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Bảng điều khiển
+                        </p>
+                    </a>
+                </li>
+                @if (user != null)
+                {
+                    @if (user.IsAdmin == 1)
+                    {
+
+                        <li class="nav-item">
+                            <a href="/Admin/Admin" class="nav-link">
+                                <i class="nav-icon far fa-user"></i>
+                                <p>Tài khoản Admin</p>
+                            </a>
+                        </li>
+                    }
+
+                }
+                <li class="nav-item">
+                    <a href="/Admin/Menu" class="nav-link">
+                        <i class="nav-icon fas fa-th-list"></i>
+                        <p>
+                            Menu
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Admin/Order" class="nav-link">
+                        <i class="nav-icon fas fa-cart-plus"></i>
+                        <p>
+                            Đơn hàng
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="" class="nav-link">
+                        <i class="fas fa-mobile-alt nav-icon"></i>
+                        <p>
+                            Quản lý sản phẩm
+                            <i class="right fas fa-chevron-down"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/Admin/CategoryProduct" class="nav-link">
+                                <i class=" nav-icon fas fa-th"></i>
+                                <p>
+                                    Danh mục sản phẩm
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/Admin/Brand" class="nav-link">
+                                <i class=" nav-icon fas fa-university"></i>
+                                <p>
+                                    Thương hiệu
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/Admin/Color" class="nav-link">
+                                <i class=" nav-icon fas fa-square" style="color:aquamarine"></i>
+                                <p>
+                                    Màu sắc
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/Admin/Customer" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Quản lý khách hàng
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/Admin/Banner" class="nav-link">
+                        <i class="nav-icon fas fa-image"></i>
+                        <p>
+                            Banner
+                        </p>
+                    </a>
+                </li>
+
+                <!-- Link cài cặt FlashSale
+                <li class="nav-item">
+                    <a href="/Admin/Sale" class="nav-link">
+                        <i class="nav-icon fas fa-chalkboard"></i>
+                        <p>
+                            Flase Sale
+                        </p>
+                    </a>
+                </li>-->
+                <li class="nav-item">
+                    <a href="/Admin/CategoryNew" class="nav-link">
+                        <i class="nav-icon far fa-newspaper"></i>
+                        <p>
+                            Tin tức
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Admin/CategoryPolicy" class="nav-link">
+                        <i class="nav-icon fas fa-book-open"></i>
+                        <p>
+                            Chính sách
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/Admin/ImageInPage" class="nav-link">
+                        <i class="nav-icon fas fa-images"></i>
+                        <p>
+                            Quản lý hình ảnh
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/Admin/Footer" class="nav-link">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>
+                            Footer
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/Admin/Config" class="nav-link">
+                        <i class="fas fa-house-damage"></i>
+
+                        <p>
+                            Thông tin về chúng tôi
+                        </p>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="/" class="nav-link">
+                        <i class="fas fa-link nav-icon"></i>
+                        <p>
+                            Simple Link
+                            <span class="right badge badge-danger">New</span>
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
+

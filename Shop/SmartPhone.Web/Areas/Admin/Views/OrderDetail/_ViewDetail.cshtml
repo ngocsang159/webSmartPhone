@@ -1,0 +1,29 @@
+﻿@model SmartPhone.Models.ViewModel.OrderDetailView;
+<style>
+    th:nth-child(1), td:nth-child(1) {
+        min-width: 200px;
+    }
+</style>
+<h4>Chi tiết thông tin đặt hàng</h4>
+<table>
+    <tr>
+        <th>Mã sản phẩm : </th>
+        <td>@Model.product.Code</td>
+    </tr>
+    <tr>
+        <th>Màu sắc : </th>
+        <td>@Model.color.Name</td>
+    </tr>
+    <tr>
+        <th>Số lượng : </th>
+        <td>@Model.orderDetail.Quantity</td>
+    </tr>
+
+
+    <tr>
+        <th>Giá bán : </th>
+        <td>@Model.orderDetail.Price</td>
+    </tr>
+
+
+</table>

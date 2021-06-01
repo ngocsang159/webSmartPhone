@@ -1,0 +1,145 @@
+﻿@model IEnumerable<SmartPhone.Models.EF.CategoryProduct>;
+@{
+    ViewData["Title"] = "ProductAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var imgImageHome = ViewBag.imgPage as IEnumerable<SmartPhone.Models.EF.ImageInPage>;
+    
+}
+
+<!-- Header Area End Here -->
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/"><i class="fa fa-home"></i>Trang chủ</a></li>
+
+
+                <li class="active"><a href="">@ViewBag.categoryName</a></li>
+
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Li's Content Wraper Area -->
+<div class="content-wraper pt-60 pb-60 pt-sm-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 order-1 order-lg-2">
+                <!-- Begin Li's Banner Area -->
+                <div class="single-banner shop-page-banner">
+                    <a href="">
+                        <img src="@imgImageHome.ElementAt(0).Image" />
+
+                    </a>
+                </div>
+                <!-- Li's Banner Area End Here -->
+                <!-- shop-top-bar start -->
+                <!-- product-select-box start -->
+                <div class="shop-top-bar mt-20 search-bar ">
+                    <div class="product-filters2">
+                        <div class="left">
+                            <strong class="label">Lọc danh sách:</strong>
+
+                            <div class="facet product-short productCate">
+
+                                <select class="nice-select product" id="productAll">
+                                    <option value="">Lọc theo loại sản phẩm</option>
+                                    @foreach (var item in Model)
+                                    {
+                                        if (item.Id == ViewBag.idCategory)
+                                        {
+                                            <option value="@item.Id" selected="selected">@item.Name</option>
+
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+
+                                        }
+
+                                    }
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="right">
+                            <div class="facet product-short productCate">
+                                <select class="nice-select" id="listProdFor" data-idcate="@ViewBag.idCategory">
+                                    <option value="">Lọc nâng cao</option>
+                                    <option value="1">Tên Sản Phẩm (A - Z)</option>
+                                    <option value="2">Giá Thấp</option>
+                                    <option value="3">Giá Cao</option>
+                                    <option value="4">Theo ngày mới nhất</option>
+                                    <option value="5">Theo ngày cũ nhất </option>
+                                    <!-- <option value="price-asc">Model (Z - A)</option> -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- product-select-box end -->
+                <!-- shop-top-bar end -->
+                <!-- shop-products-wrapper start -->
+                <div class="shop-products-wrapper">
+                    <div class="tab-content">
+                        <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
+                            <div class="product-area shop-product-area">
+                                <div class="row" id="productCategory">
+
+                                    <!--View data-->
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- shop-products-wrapper end -->
+                <div class="paginatoin-area">
+                    <div class="row">
+                        <!--Phân trang-->
+                        <div class="col-lg-6 col-md-6 pt-xs-15">
+                            <p>Hiển thị 1- @ViewBag.pageSize trong @ViewBag.Total sản phẩm</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 pt-xs-15">
+
+
+                            @*int totalPage = (int)ViewBag.TotalPage;
+                                        int totalRecord = (int)ViewBag.Total;
+                                        <p>Có <strong>@totalRecord</strong> sản phẩm trong <strong>@totalPage</strong> trang</p>
+                                </div>
+                                    }*@
+
+                            <ul class="pagination-box pt-xs-20 pb-xs-15">
+
+                                <li>
+                                    <a href="" class="Previous"><i class="fa fa-chevron-left"></i></a>
+                                </li>
+                                <li class="active"><a href="">1</a></li>
+                                <li><a href="">2</a></li>
+                                <li>
+                                    <a href="" class="Previous"><i class="fa fa-chevron-right"></i></a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- Content Wraper Area End Here -->

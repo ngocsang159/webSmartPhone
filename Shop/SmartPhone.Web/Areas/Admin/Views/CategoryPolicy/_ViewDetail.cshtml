@@ -1,0 +1,59 @@
+﻿@model SmartPhone.Models.EF.Policy;
+<style>
+    th:nth-child(1), td:nth-child(1) {
+        min-width: 200px;
+    }
+</style>
+<h4>Chi tiết thông tin danh mục sản phẩm</h4>
+<table>
+    <tr>
+        <th>Tên danh mục : </th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Url:</th>
+        <td>@Model.Slug</td>
+    </tr>
+    <tr>
+        <th>Ảnh : </th>
+        <td><img src="@Model.Image" alt="@Model.Name" height="70" width="70" style="object-fit:cover" /></td>
+    </tr>
+
+
+    <tr>
+        <th>Số thứ tự : </th>
+        <td>@Model.Position</td>
+    </tr>
+
+    <tr>
+        <th>Ngày tạo : </th>
+        <td>@Model.CreatedDate</td>
+    </tr>
+
+    <tr>
+        <th>Người tạo : </th>
+        <td>@Model.CreatedBy</td>
+    </tr>
+
+    <tr>
+        <th>Người cập nhật : </th>
+        <td>@Model.UpdatedBy</td>
+    </tr>
+
+    <tr>
+        <th>Ngày cập nhật : </th>
+        <td>@Model.UpdatedDate</td>
+    </tr>
+
+    <tr>
+        <th>Trạng thái</th>
+        @if (Model.Status == 1)
+        {
+            <td><span class="badge badge-success">Hoạt động</span></td>
+        }
+        else
+        {
+            <td><span class="badge badge-danger">Ngừng hoạt động</span></td>
+        }
+    </tr>
+</table>

@@ -1,0 +1,18 @@
+﻿@model List<SmartPhone.Models.EF.CategoryProduct>
+<div id="cate-toggle" class="category-menu-list ">
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li class="right-menu">
+                <a href="/danh-muc/@item.Slug/@item.Id">
+                    <img src="@item.Image" alt="@item.Name" />
+                    <h3>@item.Name</h3>
+                </a>
+            </li>
+        }
+
+        <li class="rx-parent">
+            <a class="rx-default" href="/danh-muc/san-pham/0">Xem Thêm</a>
+        </li>
+    </ul>
+</div>

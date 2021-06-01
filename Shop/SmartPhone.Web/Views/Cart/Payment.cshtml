@@ -1,0 +1,289 @@
+﻿@using System.Globalization;
+@model List<SmartPhone.Models.ViewModel.CartViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    decimal total = 0;
+
+}
+@{
+    CultureInfo culture = CultureInfo.GetCultureInfo("vi-VN");
+}
+<style>
+    header{
+        display:none;
+    }
+</style>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        if (item.product.PriceSale == null)
+        {
+            total += (item.product.Price.GetValueOrDefault(0) * item.Quantity);
+
+        }
+        else
+        {
+            total += (item.product.PriceSale.GetValueOrDefault(0) * item.Quantity);
+        }
+
+    }
+}
+<div class="content">
+    <div class="wrap">
+        <main class="main">
+            <div class="main-header">
+                <div class="logo logo-left">
+                    <a href="/" class="logo-link">
+                        Trung Tâm Điện Thọai Di Động Lan Hằng
+                    </a>
+                </div>
+            </div>
+            <div class="breadcrumb-area" style="padding:5px 0 12px">
+                <div class="container">
+                    <div class="breadcrumb-content">
+                        <ul>
+                            <li><a href="/"><i class="fa fa-shopping-bag"></i>Giỏ hàng</a></li>
+                            <li class="active"><a href="">Thông tin giao hàng</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="row">
+                    <div class="col col--two form-input">
+                        <div class="section">
+                            <div class="section-header">
+                                <div class="layout-flex">
+                                    <h2 class="section-title">Thông tin nhận hàng</h2>
+                                </div>
+                            </div>
+                            <form class="section-content form-input">
+                                <div class="fieldset" id="form-checkout">
+                                    <div class="field  field--show-floating-label">
+                                        <div class="field__input-wrapper">
+                                            <label for="email" class="field__label">
+                                                Email
+                                            </label>
+                                            <input name="Email" id="email" type="email" class="field__input">
+                                            <span class="form-message"></span>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="field__input-wrapper">
+                                            <label for="billingName" class="field__label">Họ và tên</label>
+                                            <input name="FullName" id="Name" type="text" class="field__input" value="">
+                                            <span class="form-message"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="field">
+                                        <div class="field__input-wrapper">
+                                            <label for="billingPhone" class="field__label">
+                                                Số điện thoại
+                                            </label>
+                                            <input name="Phone" id="billingPhone" type="number" class="field__input" value="">
+                                            <span class="form-message"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="field ">
+                                        <div class="field__input-wrapper">
+                                            <label for="billingAddress" class="field__label">
+                                                Địa chỉ
+                                            </label>
+                                            <input name="Address" id="billingAddress" type="text" class="field__input" value="">
+                                            <span class="form-message"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="field field--show-floating-label ">
+                                        <div class="field__input-wrapper field__input-wrapper--select2">
+                                            <label for="billingProvince" class="field__label"></label>
+                                            <select id="billingProvince" type="text" class="field__input field__input--select select2-hidden-accessible">
+                                                <option value="0">--Chọn tỉnh/ thành phố</option>
+                                                @foreach (var item in ViewBag.province as IEnumerable<SmartPhone.Models.EF.Province>)
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="field field--show-floating-label ">
+                                        <div class="field__input-wrapper field__input-wrapper--select2">
+                                            <label for="DistrictId" class="field__label">
+
+                                            </label>
+                                            <select name="DistrictId" id="billingDistrict" type="text" class="field__input field__input--select">
+                                                <option value="0">--Chọn Quận/ Huyện ----</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="field">
+                                        <div class="field__input-wrapper">
+                                            <label for="note" class="field__label">
+                                                Ghi chú
+                                            </label>
+                                            <textarea name="Note" id="note" type="text" class="field__input"></textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+        <aside class="sidebar">
+            <div class="sidebar__header">
+                <h2 class="sidebar__title">
+                    Đơn hàng
+                </h2>
+            </div>
+            <div class="sidebar__content">
+                <div id="order-summary" class="order-summary order-summary--is-collapsed">
+                    <div class="order-summary__sections">
+                        <div class="order-summary__section order-summary__section--product-list order-summary__section--is-scrollable order-summary--collapse-element">
+                            <table class="product-table">
+
+                                <tbody>
+                                    <!--View thông tin đơn hàng-->
+
+                                    @if (Model.Count > 0)
+                                    {
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr class="product">
+                                                <td class="product__image">
+                                                    <div class="product-thumbnail">
+                                                        <div class="product-thumbnail__wrapper" data-tg-static="">
+
+                                                            <img src="@item.product.Image" alt="" class="product-thumbnail__image">
+
+                                                        </div>
+                                                        <span class="product-thumbnail__quantity">1</span>
+                                                    </div>
+                                                </td>
+                                                <th class="product__description">
+                                                    <span class="product__description__name">
+
+                                                        @item.product.Name
+                                                    </span>
+
+
+                                                </th>
+                                                <!-- <td class="product__quantity visually-hidden"><em>Số lượng:</em> 1</td> -->
+                                                @if (item.product.PriceSale == null)
+                                                {
+
+                                                    <td class="product__price">
+                                                        @((item.product.Price.GetValueOrDefault(0) * item.Quantity).ToString("#,###", culture.NumberFormat))₫
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="product__price">
+                                                        @((item.product.PriceSale.GetValueOrDefault(0) * item.Quantity).ToString("#,###", culture.NumberFormat))₫
+                                                    </td>
+
+                                                }
+
+
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <div class="order-summary__section order-summary__section--total-lines order-summary--collapse-element" id="orderSummary">
+                            <table class="total-line-table">
+
+                                <tbody class="total-line-table__tbody">
+                                    <tr class="total-line total-line--subtotal">
+                                        <th class="total-line__name">
+                                            Tạm tính
+                                        </th>
+                                        <td class="total-line__price">@total.ToString("#,###", culture.NumberFormat)₫</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="total-line-table__footer">
+                                    <tr class="total-line payment-due">
+                                        <th class="total-line__name">
+                                            <span class="payment-due__label-total">
+                                                Tổng cộng
+                                            </span>
+                                        </th>
+                                        <td class="total-line__price">
+                                            <span class="payment-due__price"></span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="order-summary__nav field__input-btn-wrapper hide-on-mobile layout-flex--row-reverse">
+                            <button type="button" class="btn btn-checkout spinner">
+                                <span class="spinner-label" id="checkout-payment">ĐẶT HÀNG</span>
+                            </button>
+
+
+                            <a href="/dat-hang" class="previous-link">
+                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                <span class="previous-link__content">Quay về giỏ hàng</span>
+                            </a>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+<script src="~/Admin/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#billingProvince").change(function () {
+            var getProvinceID = $(this).val();
+            console.log(getProvinceID);
+            GetListDistrict(getProvinceID);
+
+        })
+        function GetListDistrict(id) {
+            $.ajax({
+                url: "/Admin/Customer/GetListDistrict",
+                type: "post",
+                dataType: "json",
+                data: { id: id },
+                beforeSend: function () { },
+                success: function (res) {
+                    console.log(typeof res);
+                    var option = `<option value="0">---Chọn Huyện------</option>`;
+                    $(res).each(function (index, item) {
+                        option += `<option value="${item.id}">${item.name}</option>`
+                    })
+                    $("#billingDistrict").html('');
+                    $("#billingDistrict").append(option);
+                },
+                error: function () { },
+                complete: function () { }
+            })
+        }
+
+
+
+       
+    })
+
+   
+</script>

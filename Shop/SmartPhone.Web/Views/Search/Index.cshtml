@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listCategroyProduct = ViewBag.listCate as IEnumerable<SmartPhone.Models.EF.CategoryProduct>;
+    var listCategoryNew = ViewBag.listNew as IEnumerable<SmartPhone.Models.EF.New>;
+}
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/"><i class="fa fa-home"></i>Trang chủ</a></li>
+                <li class="active"><a>Tìm kiếm</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Li's Main Blog Page Area -->
+<div class="content-wraper pt-60 pb-60 pt-sm-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 order-1 order-lg-2">
+                <div class="search-result-title">
+                    <h2>Kết quả tìm kiếm <span id="search-value"></span> </h2>
+                </div>
+
+
+
+                <div class="shop-top-bar mt-20 search-bar ">
+                    <div class="product-filters2">
+                        <div class="left">
+                            <strong class="label">Lọc danh sách:</strong>
+
+                            <div class="facet product-short productCate">
+
+                                <select class="nice-select product" id="selectCateProduct">
+                                    <option value="">Lọc theo loại sản phẩm</option>
+                                    @foreach (var item in listCategroyProduct)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+
+                            </div>
+                            <div class="facet product-short newCate d-none ">
+                                <select class="nice-select" id="selectCateNew">
+                                    <option value="0">Loại theo loại tin tức</option>
+
+                                    @foreach (var item in listCategoryNew)
+                                    {
+                                        <option value="@item.Id" >@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="facet product-short">
+                                <select class="nice-select" id="selectTitle">
+                                    <option value="1">Sản phẩm</option>
+                                    <option value="2">Tin tức</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="right">
+                            <div class="facet product-short productCate">
+                                <select class="nice-select" id="selectSortProduct">
+                                    <option value="">Lọc nâng cao</option>
+                                    <option value="1">Tên Sản Phẩm (A - Z)</option>
+                                    <option value="2">Giá Thấp</option>
+                                    <option value="3">Giá Cao</option>
+                                    <option value="4">Giá ưu đãi</option>
+                                    <!-- <option value="price-asc">Model (Z - A)</option> -->
+                                </select>
+
+                            </div>
+
+                            <div class="facet product-short newCate d-none">
+                                <select class="nice-select" id="selectSortNew">
+                                    <option value="">Lọc nâng cao</option>
+                                    <option value="1">Tên Sản Phẩm (A - Z)</option>
+                                    <option value="2">Theo ngày sớm nhất</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="shop-products-wrapper">
+                    <div class="tab-content">
+                        <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
+                            <div class="product-area product-search shop-product-area">
+                                <div class="row" id="divProductSearch">
+
+
+                                    <!--View thông tin-->
+                                </div>
+                                <div class="row d-none" id="divNewSearch">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="paginatoin-area">
+                            <div class="row">
+                                <!--Phân trang-->
+                                <div class="col-lg-6 col-md-6 pt-xs-15">
+                                    @*<p>Hiển thị 1-12 trong 13</p>*@
+                                </div>
+                                <div class="col-lg-6 col-md-6 pt-xs-15">
+
+
+                                    @*int totalPage = (int)ViewBag.TotalPage;
+                        int totalRecord = (int)ViewBag.Total;
+                        <p>Có <strong>@totalRecord</strong> sản phẩm trong <strong>@totalPage</strong> trang</p>
+                </div>
+                    }*@
+
+                                    <ul class="pagination-box pt-xs-20 pb-xs-15">
+
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Li's Main Content Area End Here -->
+</div>
+

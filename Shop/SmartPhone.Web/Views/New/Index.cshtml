@@ -1,0 +1,177 @@
+﻿@using SmartPhone.Models.EF;
+@model SmartPhone.Models.EF.ResponseDataAdmin<SmartPhone.Models.EF.New>;
+@{
+    ViewData["Title"] = "Index";
+    var lstCategoryNew = ViewBag.GetCategoryNew as IEnumerable<New>;
+    var lstNewSide = ViewBag.GetListNewSide as IEnumerable<New>;
+    var Id = ViewBag.GetCategoryNew1;
+    var NewSide = ViewBag.GetNewSide as SmartPhone.Models.EF.New; 
+
+}
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/"><i class="fa fa-home"></i>Trang chủ</a></li>
+                <li class="active"><a href="tin-tuc">Tin tức</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Li's Main Blog Page Area -->
+<div class="li-main-blog-page pt-30 pb-55">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Blog Sidebar Area -->
+            <div class="col-lg-3 order-lg-1 order-2">
+                <div class="li-blog-sidebar-wrapper">
+                    <div class="li-blog-sidebar">
+                        <h4 class="li-blog-sidebar-title">Danh mục tin tức</h4>
+                        <ul class="li-blog-archive">
+                            @foreach (var item in lstCategoryNew)
+                            {
+                                <li><a href="/tin-tuc/@item.Slug/@item.Id">@item.Name</a></li>
+                            }
+
+
+                        </ul>
+                    </div>
+                    <div class="li-blog-sidebar">
+                        <h4 class="li-blog-sidebar-title blog-title">
+                            <span>Bài viết mới</span>
+                        </h4>
+                        <div class="td-block-span12">
+                            <div class="td_module_2 td_module_wrap td-animation-stack">
+                                <div class="td-module-image">
+                                    <div class="td-module-thumb">
+                                        <a href="" rel="bookmark" class="td-image-wrap" title="">
+                                            <img width="324" height="160" class="entry-thumb"
+                                                 src="@NewSide.Image"
+                                                 srcset=""
+                                                 sizes="(max-width: 324px) 100vw, 324px"
+                                                 alt="notch trên iPhone 13 5G"
+                                                 title="">
+                                        </a>
+                                    </div>
+                                    <a href="" class="td-post-category">Tin hot</a>
+                                </div>
+                                <h3 class="entry-title td-module-title">
+                                    <a href=""
+                                       rel="bookmark"
+                                       title="Thêm hình ảnh cho thấy notch trên iPhone 13 5G sẽ được thu nhỏ đáng kể!">
+                                        @if (NewSide.Name.Length > 70)
+                                        {
+                                            NewSide.Name = NewSide.Name.Substring(0, 67) + "...";
+                                        }
+                                        @NewSide.Name
+                                    </a>
+                                </h3>
+
+                                <div class="td-module-meta-info">
+                                    <span class="td-post-date">
+                                        <time class="entry-date updated td-module-date"
+                                              >@(NewSide.CreatedDate.HasValue ? NewSide.CreatedDate.Value.ToString("dd/MM/yyyy") :DateTime.Now.ToString("dd/MM/yyyy"))</time>
+                                    </span>
+                                </div>
+
+
+                                <div class="td-excerpt">
+                                    @if (NewSide.Description.Length > 120)
+                                    {
+                                        NewSide.Description = NewSide.Description.Substring(0, 108) + "....";
+                                    }
+
+                                    @NewSide.Description
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                        @foreach (var item in lstNewSide)
+                        {
+                            <div class="li-recent-post pb-15">
+                                <div class="li-recent-post-thumb">
+                                    <a href="blog-details-left-sidebar.html">
+                                        <img class="img-full" src="@item.Image"
+                                             alt="@item.Name">
+                                    </a>
+                                </div>
+                                <div class="li-recent-post-des">
+                                    <span>
+                                        
+                                            @if (item.Name.Length > 40)
+                                            {
+                                                item.Name = item.Name.Substring(0, 40) + "...";
+                                            }
+                                           
+                                        <a href="blog-details-left-sidebar.html"> @item.Name</a>
+                                    </span>
+
+                                    <div class="td-module-meta-info">
+                                        <!--<a href="" class="td-post-category">ViewBag.CategoryNewName</a>-->
+                                        <span class="li-post-date">
+                                            @(item.CreatedDate.HasValue ?
+                                                item.CreatedDate.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy"))
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- Li's Blog Sidebar Area End Here -->
+            <!-- Begin Li's Main Content Area -->
+            <div class="col-lg-9 order-lg-2 order-1">
+                <div class="shop-top-bar mt-10 search-bar ">
+                    <div class="product-filters2">
+                        <div class="left">
+                            <strong class="label">Lọc danh sách:</strong>
+
+                            <div class="facet product-short">
+
+                                <select class="nice-select" id="listNewFor" data-idnew="@ViewBag.IdNew">
+                                    <option value="">Lọc nâng cao</option>
+                                    <option value="1">Theo ngày mới nhất</option>
+                                    <!-- <option value="sales">Name (Z - A)</option> -->
+                                    <option value="2">Theo ngày cũ nhất</option>
+                                
+                                </select>
+
+                            </div>
+                            
+
+                        </div>
+
+                        
+                    </div>
+                </div>
+                <div class="row li-main-content mt-20" id="divListNew">
+
+                    <!--view tin tức -->
+                    <!-- Begin Li's Pagination Area -->
+                    <!-- Li's Pagination End Here Area -->
+                </div>
+                <div class="col-lg-12">
+                    <div class="li-paginatoin-area text-center pt-25">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="li-pagination-box">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Main Content Area End Here -->
+        </div>
+    </div>
+</div>
+

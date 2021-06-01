@@ -1,0 +1,162 @@
+﻿@model Dictionary<string, object>;
+@using SmartPhone.Models.EF;
+@using SmartPhone.Models.ViewModel; 
+
+@{
+    Order order = Model["orderInfor"] as Order;
+    List<OrderDetail> orderDetails = Model["orderDetails"] as List<OrderDetail>;
+    List<Product> products = Model["products"] as List<Product>;
+    DistrictView districtView = Model["address"] as DistrictView;
+    List<MasterDatum> masterDatum = Model["color"] as List<MasterDatum>;
+}
+<div style="padding:0 24px 24px; color:#663399">
+    <div style="height:100px;font-family: sans-serif;">
+        <div style="        width: 50%;
+        text-align: center;
+        float: left;">
+            <h1 style="font-size: 60px;margin-top:0px;">LH</h1>
+
+            <h1 style="font-size:18px; font-weight:600">Trung Tâm Điện Thoại Di Động Lan Hằng</h1>
+        </div>
+        <div style="float:right; margin-right:100px;">
+            <div style="padding-top:0px">
+                <label style="margin-right: 8px;font-weight:bold">Địa chỉ:</label> <span>Mê Linh, Đông Hưng,Thái Bình</span>
+            </div>
+            <div style="padding-top:8px">
+                <label style="margin-right: 8px;font-weight:bold">Số điện thoại:</label> <span>0383515382</span>
+            </div>
+            <div style="padding-top:8px">
+                <label style="margin-right: 8px;font-weight:bold">Email:</label> <span>LanHangMobile@gmail.com</span>
+            </div>
+            <div style="padding-top:8px">
+                <label style="margin-right: 8px;font-weight:bold">Facebook:</label> <span>Trung Tâm ĐTDĐ Lan Hằng</span>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top:30px !important;clear:both;font-family: sans-serif;">
+        <h2 style="text-align:center;margin:0px">HÓA ĐƠN BÁN HÀNG</h2>
+    </div>
+    <div style="padding-top:30px !important;font-family: sans-serif;">
+        <div>
+            <label style="margin-right: 8px;font-weight:bold">Họ tên khách hàng:</label><span>@order.FullName</span>
+        </div>
+        <div style="padding-top:8px">
+            <label style="margin-right: 8px;font-weight:bold">Địa chỉ: </label><span>@order.Address, @districtView.district.Name, @districtView.provinces.Name</span>
+        </div>
+        <div style="padding-top:8px">
+            <label style="margin-right: 8px;font-weight:bold">Email: </label><span>@order.Email</span>
+        </div>
+        <div style="padding-top:8px">
+            <label style="margin-right: 8px;font-weight:bold">Số điện thoại: </label><span>@order.Phone</span>
+        </div>
+        @*<div style="padding-top:8px;">
+                @{
+                    string paymentMethod = "";
+                    if (order.PaymentMethod.Value == Convert.ToInt32(Common.EnumApp.PaymentMethod.DirectPayment))
+                    {
+                        paymentMethod = "Thanh toán trực tiếp";
+                    }
+                    else if (order.PaymentMethod.Value == Convert.ToInt32(Common.EnumApp.PaymentMethod.Momo))
+                    {
+                        paymentMethod = "Thanh toán qua Momo";
+                    }
+                    else if (order.PaymentMethod.Value == Convert.ToInt32(Common.EnumApp.PaymentMethod.Momo))
+                    {
+                        paymentMethod = "Thanh toán qua VNPay";
+                    }
+                }
+                <label style="font-weight:bold">Hình thức thanh toán: </label><span>@paymentMethod</span>
+            </div>*@
+    </div>
+    <div style="font-family: sans-serif;padding-top:10px;">
+        <table style="width:100%;border-collapse:collapse;color:#663399">
+            <thead>
+                <tr>
+                    <th style="border:1px solid;padding:5px 5px;text-align:center">
+                        Tên hàng hóa, dịch vụ
+                    </th>
+                    <th style="border:1px solid;padding:5px 5px;text-align:center">
+                        Đơn vị tính
+                    </th>
+                    <th style="border:1px solid;padding:5px 5px; text-align:center;">
+                        Màu sắc
+                    </th>
+                    <th style="border:1px solid;padding:5px 5px;text-align:center">
+                        Số lượng
+                    </th>
+                    <th style="border:1px solid;padding:5px 5px;text-align:center">
+                        Đơn giá
+                    </th>
+                    <th style="border:1px solid;padding:5px 5px;text-align:center">
+                        Thành tiền
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in orderDetails)
+                {
+
+                <tr>
+                    @foreach (var product in products)
+                    {
+                        if (product.Id == item.ProductId)
+                        {
+                            <td style="border:1px solid;padding:5px 5px;text-align:center">@product.Name</td>
+                            break;
+                        }
+                    }
+                    <td style="border:1px solid;padding:5px 5px;text-align:center">Chiếc</td>
+                    @foreach (var color in masterDatum)
+                    {
+                        if (color.Id == item.ColorId)
+                        {
+                            <td style="border:1px solid;padding:5px 5px;text-align:center">@color.Name</td>
+                            break;
+                        }
+                    }
+              
+                    <td style="border:1px solid;padding:5px 5px;text-align:center">@item.Quantity</td>
+
+                    <td style="border:1px solid;padding:5px 5px;text-align:center">@item.Price.Value.ToString("N0")đ</td>
+                    @{
+                        var thanhtien = item.Price * item.Quantity;
+                    }
+                    <td style="border:1px solid;padding:5px 5px;text-align:center">@thanhtien.Value.ToString("N0")đ</td>
+                </tr>
+                }
+            <tr>
+                <td style="padding:5px 5px;text-align:center;font-weight:bold">Tổng cộng</td>
+                <td style="padding:5px 5px;text-align:center"></td>
+                <td style="padding:5px 5px;text-align:center"></td>
+                <td style="padding:5px 5px;text-align:center"></td>
+                <td style="padding:5px 5px;text-align:center"></td>
+                @{
+                    var total = orderDetails.Sum(n => n.Price * n.Quantity);
+                }
+                <td style="padding:5px 5px;text-align:center;font-weight:bold">@total.Value.ToString("N0") VNĐ</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="font-family: sans-serif;padding-top:20px;text-align:right">
+        @{
+            DateTime dateTime = DateTime.Now;
+            var monthEdit = dateTime.Month >= 10 ? dateTime.Month.ToString() : "0" + dateTime.Month.ToString();
+            var dayEdit = dateTime.Day >= 10 ? dateTime.Day.ToString() : "0" + dateTime.Day.ToString();
+            var year = dateTime.Year;
+        }
+        <i>Thái Bình, ngày @dayEdit tháng @monthEdit năm @year</i>
+    </div>
+    <div style="font-family: sans-serif;padding-top:10px;display:flex">
+        <div style="text-align:center;float:left">
+            <h4 style="margin:0px">Người bán hàng</h4>
+            <i>(Ký & ghi rõ họ tên)</i>
+        </div>
+        <div style="text-align:center;float:right">
+            <h4 style="margin:0px">Khách hàng</h4>
+            <i>(Ký & ghi rõ họ tên)</i>
+        </div>
+
+    </div>
+
+</div>

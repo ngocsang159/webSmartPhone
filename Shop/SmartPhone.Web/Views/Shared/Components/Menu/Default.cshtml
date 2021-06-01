@@ -1,0 +1,24 @@
+﻿@model List<SmartPhone.Models.ViewModel.MenuViewModel>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li class="dropdown-holder">
+
+            <a href="/@item.menu.Slug">@item.menu.Name</a>
+            @if (item.subMenu.Count() > 0)
+            {
+                <ul class="hb-dropdown">
+                    @foreach (var sub in item.subMenu)
+                    {
+                        <li class="sub-dropdown-holder">
+
+                            <a href="/@sub.Slug"> @sub.Name </a>
+                        </li>
+                    }
+                </ul>
+            }
+        </li>
+    }
+    <!-- Header Bottom Menu Information Area End Here -->
+</ul>

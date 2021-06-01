@@ -1,0 +1,58 @@
+﻿@model SmartPhone.Models.ViewModel.CustomerViewModel;
+<style>
+    th:nth-child(1), td:nth-child(1) {
+        min-width: 200px;
+    }
+</style>
+<h4>Chi tiết thông tin người dùng</h4>
+<table>
+    <tr>
+        <th>Tên : </th>
+        <td>@Model.customer.Name</td>
+    </tr>
+    <tr>
+        <th>Email : </th>
+        <td>@Model.customer.Email</td>
+    </tr>
+
+    <tr>
+        <th>Số điện thoại : </th>
+        <td>@Model.customer.Phone</td>
+    </tr>
+
+    <tr>
+        <th>Địa chỉ : </th>
+        <td>@Model.customer.Address- @Model.district.Name - @Model.provinces.Name</td>
+    </tr>
+
+    <tr>
+        <th>Người tạo : </th>
+        <td>@Model.customer.CreatedBy</td>
+    </tr>
+    <tr>
+        <th>Ngày tạo : </th>
+        <td>@Model.customer.CreatedDate</td>
+    </tr>
+    <tr>
+        <th>Người cập nhật : </th>
+        <td>@Model.customer.UpdatedBy</td>
+    </tr>
+
+    <tr>
+        <th>Ngày cập nhật : </th>
+        <td>@Model.customer.UpdatedDate</td>
+    </tr>
+
+    <tr>
+        <th>Trạng thái</th>
+        @if (Model.customer.Status == 1)
+        {
+            <td><span class="badge badge-success">Hoạt động</span></td>
+        }
+        else
+        {
+            <td><span class="badge badge-danger">Ngừng hoạt động</span></td>
+        }
+    </tr>
+</table>
+

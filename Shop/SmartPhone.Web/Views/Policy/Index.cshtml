@@ -1,0 +1,109 @@
+﻿@using SmartPhone.Models.EF;
+@using SmartPhone.Models.ViewModel;
+@{
+    ViewData["Title"] = "Index";
+    var lstPolicy = ViewBag.GetPolicy as IEnumerable<PolicyViewModel>;
+    var policyDetail = /*(Policy)*/ViewBag.PolicyDetail as IEnumerable<Policy>;
+}
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Blog Left Detail</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Li's Main Blog Page Area -->
+<div class="li-main-blog-page pt-30 pb-55">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Blog Sidebar Area -->
+            <div class="col-lg-3 order-lg-1 order-2">
+                <div class="policy-info" id="policy-info">
+                    <div class="inner-title">
+                        <h2>
+                            <span>chính sách<br>& điều khoản</span>
+                        </h2>
+                    </div>
+                    <div class="policy-des">
+                        @foreach (var item in lstPolicy)
+                        {
+                            <h3 class="title-policy">
+                                <img src="@item.policy.Image">
+                                <span>@item.policy.Name</span>
+                            </h3>
+                        }
+
+                        @*<ul class="nav-policy">
+            <li class="policy-item">
+                <a href="#delivery" title="">Giao hàng</a>
+            </li>
+            <li class="policy-item">
+                <a href="#receive" title="">Nhận hàng</a>
+            </li>
+            <li class="policy-item">
+                <a href="#transport" title="">Vận chuyển</a>
+            </li>
+        </ul>*@
+                        @*<h3 class="title-policy">
+                            <img src="images/payment.png">
+                            <span>chính sách đổi trả</span>
+                        </h3>
+                        <h3 class="title-policy">
+                            <img src="images/use_term.png">
+                            <span>Điều khoản sử dụng</span>
+                        </h3>*@
+
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Blog Sidebar Area End Here -->
+            <!-- Begin Li's Main Content Area -->
+            <div class="col-lg-9 order-lg-2 order-1">
+                <div class="content-policy">
+                    <div class="transport-content">
+
+                        @*@foreach (var item in lstPolicy)
+        {
+            <h4 class="title-content-policy">
+                <img src="@item.policy.Image" alt="">
+                <span>@item.policy.Name</span>
+            </h4>
+            @foreach (var lst in item.subPolicy)
+            {
+                <div id="" data-id="@lst.Id" class="content-partial ">
+                    <h5>@lst.Name</h5>
+                    <p>
+                        @Html.Raw(lst.Content)
+                    </p>
+                </div>
+
+            }
+        }*@
+                        @foreach (var item in policyDetail)
+                        {
+                        <!--<h4 class="title-content-policy">-->
+                            @*<img src="@item.Image" alt="">
+                           <span>@item.Name</span>*@
+                        <!--</h4>-->
+                        <div id="" data-id="" class="content-partial ">
+                            @*<h5>@item.Name</h5>*@
+                            <p>
+                                @Html.Raw(item.Content)
+                            </p>
+                        </div>
+                        }
+                    </div>
+                <div class="policy-img">
+                    <img src="images/policy_footer.png" alt="">
+                </div>
+            </div>
+            <!-- Li's Main Content Area End Here -->
+        </div>
+    </div>
+</div>
+

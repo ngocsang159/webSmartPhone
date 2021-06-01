@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var session = HttpContextAccessor.HttpContext.Session.GetString("User");
+    var user = new SmartPhone.Models.EF.Customer();
+    if (session != null)
+    {
+        user = JsonConvert.DeserializeObject<SmartPhone.Models.EF.Customer>(session);
+    }
+}
+<div class="col-lg-9 col-md-8">
+    <div class="header-top-right">
+        <ul class="ht-menu">
+            <!-- Begin Setting Area -->
+
+            @if (user.Name == null)
+            {
+                <li>
+                    <div class="ht-setting-list">
+                        <a href="dang-ky-tai-khoan">Đăng Ký</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="ht-setting-list">
+                        <a href="dang-nhap-tai-khoan">
+                            Đăng Nhập
+
+                        </a>
+                    </div>
+                </li>
+            }
+            else
+
+            {
+                <li class="header_username">
+                    <div class="ht-setting-list">
+
+
+                        <div class="navbar__username">@user.Name</div>
+                    </div>
+                    <!--header _user-menu-->
+                    <div class="username_menu">
+                        <ul class="username_menu_list">
+                            <li class="username_menu_item"><a href="" class="user_menu-link">Tài khoản của tôi</a></li>
+                            @*<li class="username_menu_item"><a href="" class="user_menu-link">Đơn mua</a></li>*@
+                            <li class="username_menu_item"><a href="/Author/LogOut" class="user_menu-link">Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </li>
+            }
+
+            <!-- Language Area End Here -->
+        </ul>
+    </div>
+</div>

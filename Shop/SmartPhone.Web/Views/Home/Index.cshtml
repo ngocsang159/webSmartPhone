@@ -1,0 +1,654 @@
+﻿@using System.Globalization;
+@model SmartPhone.Models.EF.CategoryProduct;
+@{
+    ViewData["Title"] = "Index";
+    var imgBanner = ViewBag.imgBanner as IEnumerable<SmartPhone.Models.EF.Banner>;
+    var imgImageHome = ViewBag.imgPage as IEnumerable<SmartPhone.Models.EF.ImageInPage>;
+    var productHot = ViewBag.productHot as IEnumerable<SmartPhone.Models.EF.Product>;
+    var productIphone = ViewBag.productIphone as IEnumerable<SmartPhone.Models.EF.Product>;
+    var productSamsung = ViewBag.productSamsung as IEnumerable<SmartPhone.Models.EF.Product>;
+    var productSmartPhone = ViewBag.productSmartPhone as IEnumerable<SmartPhone.Models.EF.Product>;
+    var productAccessories = ViewBag.productAccessories as IEnumerable<SmartPhone.Models.EF.Product>;
+}
+@{
+    CultureInfo culture = CultureInfo.GetCultureInfo("vi-VN");
+}
+<div class="slider-with-banner">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Slider Area -->
+            <div class="col-lg-12">
+                <div class="slider-area pt-sm-30 pt-xs-30 pb-10">
+                    <div class="slider-active owl-carousel">
+                        <!-- Begin Single Slide Area -->
+                        @foreach (var item in imgBanner)
+                        {
+
+                            <div class="single-slide align-center-left animation-style-02 bg-4">
+                                <div class="slider-progress"></div>
+                                <div class="bg-6" style="background-image:url(@item.Image)"></div>
+                                <div class="slider-content">
+
+
+                                    <div class="default-btn slide-btn">
+                                        <a class="links" href="/them-gio-hang/@item.ProductId">Mua Ngay</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <!-- Slider Area End Here -->
+        </div>
+    </div>
+</div>
+<!-- Slider With Category Menu Area End Here -->
+<!-- Begin Li's Static Banner Area -->
+<div class="li-static-banner pt-20 pt-sm-30">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Single Banner Area -->
+            <!-- Single Banner Area End Here -->
+            <!-- Begin Single Banner Area -->
+            @foreach (var item in imgImageHome)
+            {
+                @if (item.Position < 3)
+                {
+                    <div class="col-lg-4 col-md-4 text-center">
+                        <div class="single-banner pb-xs-30">
+                            <a href="#" style="height:208px">
+                                <img src="@item.Image" alt="Lx-shop Static Banner" style="height:100%">
+                            </a>
+                        </div>
+                    </div>
+                }
+            }
+
+
+        </div>
+    </div>
+</div>
+<!-- Li's Static Banner Area End Here -->
+<!-- Begin Li's Special Product Area -->
+<section class="product-area li-laptop-product Special-product pt-60 pb-45">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Section Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <div class="header-name">
+                        <h4>
+                            <a href="">Sản phẩm khuyến mãi Hot</a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="special-product-active owl-carousel">
+                        @foreach (var item in productHot)
+                        {
+
+
+                            <div class="col-lg-12">
+                                <!-- single-product-wrap start -->
+                                <div class="single-product-wrap">
+                                    <div class="product-image">
+                                        <a href="/san-pham/@item.Slug/@item.Id">
+                                            <img src="@item.Image" alt="Li's Product Image">
+                                        </a>
+                                        <span class="sticker">Mới</span>
+                                    </div>
+                                    <div class="product_desc">
+                                        <div class="product_desc_info">
+                                            <div class="product-review">
+                                                <h5 class="manufacturer">
+                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                </h5>
+                                                <div class="rating-box">
+                                                    <ul class="rating">
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product_name"><a class="product_name_link" href="/san-pham/@item.Slug/@item.Id">@item.Name</a></div>
+                                            @if (item.PriceSale == 0)
+                                            {
+                                                <div class="price-box pt-10">
+                                                    <span class="new-price new-price-2">
+                                                        @item.Price.Value.ToString("#,###", culture.NumberFormat)
+                                                        ₫
+                                                    </span>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="price-box pt-10">
+                                                    <span class="new-price new-price-2">
+                                                        @item.PriceSale.Value.ToString("#,###", culture.NumberFormat)₫
+                                                    </span>
+                                                    <span class="old-price">
+                                                        @item.Price.Value.ToString("#,###", culture.NumberFormat)
+                                                        ₫
+                                                    </span>
+                                                </div>
+
+                                            }
+                                            <!-- <div class="countersection">
+                                                <div class="li-countdown"></div>
+                                            </div> -->
+                                        </div>
+                                        <div class="add-actions">
+                                            <ul class="add-actions-link">
+                                                <li class="add-cart active"><a href="#" title="quick view" data-id="@item.Id" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter">Mua hàng</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- single-product-wrap end -->
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Section Area End Here -->
+        </div>
+    </div>
+</section>
+
+<section class="product-area li-laptop-product li-laptop-product-2 pb-45">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Section Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <div class="header-name">
+                        <h4>
+                            <a href="/danh-muc/@Model.Slug/7">Iphone nổi bật nhất</a>
+                        </h4>
+                    </div>
+                    @*<ul class="li-sub-category-list">
+                            <li class="active"><a href="shop-left-sidebar.html">iPhone VN/A</a></li>
+                            <li><a href="shop-left-sidebar.html">iPhone 12 Series</a></li>
+                            <li><a href="shop-left-sidebar.html">iPhone 11 Pro|ProMax</a></li>
+                        </ul>*@
+                </div>
+                <div class="li-banner-2 pt-15">
+                    <div class="row">
+                        <!-- Begin Single Banner Area -->
+                        <!-- Single Banner Area End Here -->
+                        <!-- Begin Single Banner Area -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="single-banner pt-xs-30">
+                                <a href="#">
+                                    <img src="@imgImageHome.ElementAt(6).Image" alt="Li's Static Banner">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Single Banner Area End Here -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="product-active owl-carousel">
+                        @foreach (var item in productIphone)
+                        {
+                            <div class="col-lg-12">
+                                <!-- single-product-wrap start -->
+                                <div class="single-product-wrap">
+                                    <div class="product-image">
+                                        <a href="/san-pham/@item.Slug/@item.Id">
+                                            <img src="@item.Image" alt="Alternate Text" />
+
+                                        </a>
+                                        @if (item.IsHot == 1)
+                                        {
+                                            <span class="sticker">Hot</span>
+                                        }
+                                        else if (item.OldNew == 1)
+                                        {
+                                            <span class="sticker">Mới</span>
+                                        }
+                                        else if (item.OldNew == 2)
+                                        {
+                                            <span class="sticker">99%</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="sticker">Cũ</span>
+                                        }
+                                    </div>
+                                    <div class="product_desc">
+                                        <div class="product_desc_info">
+                                            <div class="product-review">
+                                                <h5 class="manufacturer">
+                                                    <a href="/san-pham/@item.Slug/@item.Id">Graphic Corner</a>
+                                                </h5>
+                                                <div class="rating-box">
+                                                    <ul class="rating">
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product_name"><a class="product_name_link" href="/san-pham/@item.Slug/@item.Id">@item.Name</a></div>
+                                            @if (item.PriceSale == 0)
+                                            {
+                                                <div class="price-box pt-10">
+                                                    <span class="new-price new-price-2">
+                                                        @item.Price.Value.ToString("#,###", culture.NumberFormat)
+                                                        ₫
+                                                    </span>
+                                                </div>
+
+                                            }
+                                            else
+                                            {
+                                                <div class="price-box pt-10">
+                                                    <span class="new-price new-price-2">
+                                                        @item.PriceSale.Value.ToString("#,###", culture.NumberFormat)
+                                                        ₫
+                                                    </span>
+                                                    <span class="old-price">
+                                                        @item.Price.Value.ToString("#,###", culture.NumberFormat)
+                                                        ₫
+                                                    </span>
+                                                </div>
+
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="add-actions">
+                                        <ul class="add-actions-link">
+                                            <li class="add-cart active"><a href="#" title="quick view" data-id="@item.Id" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter">Mua hàng</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- single-product-wrap end -->
+
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Section Area End Here -->
+        </div>
+    </div>
+</section>
+
+<section class="product-area li-laptop-product li-laptop-product-2 pb-45">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Section Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <div class="header-name">
+                        <h4>
+                            <a href="">Samsung nổi bật nhất</a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="li-banner-2 pt-15">
+                    <div class="row">
+                        <!-- Begin Single Banner Area -->
+                        <div class="col-lg-6 col-md-6">
+                            <div class="single-banner">
+                                <a href="#">
+
+                                    <img src="@imgImageHome.ElementAt(3).Image" alt="Li's Static Banner">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Single Banner Area End Here -->
+                        <!-- Begin Single Banner Area -->
+                        <div class="col-lg-6 col-md-6">
+                            <div class="single-banner pt-xs-30">
+                                <a href="#">
+                                    <img src="@imgImageHome.ElementAt(4).Image" alt="Li's Static Banner">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Single Banner Area End Here -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="product-active owl-carousel">
+                        @foreach (var item in productSamsung)
+                        {
+
+                            <div class="col-lg-12">
+                                <!-- single-product-wrap start -->
+                                <div class="single-product-wrap">
+                                    <div class="product-image">
+                                        <a href="/san-pham/@item.Slug/@item.Id">
+                                            <img src="@item.Image" alt="Alternate Text" />
+
+                                        </a>
+                                        @if (item.IsHot == 1)
+                                        {
+                                            <span class="sticker">Hot</span>
+                                        }
+                                        else if (item.OldNew == 1)
+                                        {
+                                            <span class="sticker">Mới</span>
+                                        }
+                                        else if (item.OldNew == 2)
+                                        {
+                                            <span class="sticker">99%</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="sticker">Cũ</span>
+                                        }
+                                    </div>
+                                    <div class="product_desc">
+                                        <div class="product_desc_info">
+                                            <div class="product-review">
+                                                <h5 class="manufacturer">
+                                                    <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                </h5>
+                                                <div class="rating-box">
+                                                    <ul class="rating">
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product_name"><a class="product_name_link" href="/san-pham/@item.Slug/@item.Id">@item.Name</a></div>
+                                            @if (item.PriceSale == 0)
+                                            {
+                                                <div class="price-box pt-10">
+                                                    <span class="new-price new-price-2">
+                                                        @item.Price.Value.ToString("#,###", culture.NumberFormat)
+                                                        ₫
+                                                    </span>
+                                                </div>
+
+                                            }
+                                            else
+                                            {
+                                                <div class="price-box pt-10">
+                                                    <span class="new-price new-price-2">
+                                                        @item.PriceSale.Value.ToString("#,###", culture.NumberFormat)
+                                                        ₫
+                                                    </span>
+                                                    <span class="old-price">
+                                                        @item.Price.Value.ToString("#,###", culture.NumberFormat)
+                                                        ₫
+                                                    </span>
+                                                </div>
+
+                                            }
+                                        </div>
+                                        <div class="add-actions">
+                                            <ul class="add-actions-link">
+                                                <li class="add-cart active"><a href="#" title="quick view" data-id="@item.Id" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter">Mua hàng</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- single-product-wrap end -->
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Section Area End Here -->
+        </div>
+    </div>
+</section>
+
+<section class="product-area li-laptop-product li-tv-audio-product pb-45">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Section Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <div class="header-name">
+                        <h4>
+                            <a href="">Điện thoại</a>
+                        </h4>
+                    </div>
+                    @*<ul class="li-sub-category-list">
+                            <li class="active"><a href="shop-left-sidebar.html">Chamcham</a></li>
+                            <li><a href="shop-left-sidebar.html">Sanai</a></li>
+                            <li><a href="shop-left-sidebar.html">Meito</a></li>
+                        </ul>*@
+                </div>
+                <div class="li-banner-2 pt-15">
+                    <div class="row">
+                        <!-- Begin Single Banner Area -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="single-banner">
+                                <a href="#">
+
+                                    <img src="@imgImageHome.ElementAt(5).Image" alt="Li's Static Banner">
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="product-active owl-carousel">
+                        @foreach (var item in productSmartPhone)
+                        {
+
+                            <div class="col-lg-12">
+                                <!-- single-product-wrap start -->
+                                <div class="single-product-wrap">
+                                    <div class="product-image">
+                                        <a href="/san-pham/@item.Slug/@item.Id">
+                                            <img src="@item.Image" alt="Li's Product Image">
+                                        </a>
+                                        @if (item.IsHot == 1)
+                                        {
+                                            <span class="sticker">Hot</span>
+                                        }
+                                        else if (item.OldNew == 1)
+                                        {
+                                            <span class="sticker">Mới</span>
+                                        }
+                                        else if (item.OldNew == 2)
+                                        {
+                                            <span class="sticker">99%</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="sticker">Cũ</span>
+                                        }
+                                    </div>
+                                    <div class="product_desc">
+                                        <div class="product_desc_info">
+                                            <div class="product-review">
+                                                <h5 class="manufacturer">
+                                                    <a href="shop-left-sidebar.html">Apple</a>
+                                                </h5>
+                                                <div class="rating-box">
+                                                    <ul class="rating">
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product_name"><a class="product_name_link" href="/san-pham/@item.Slug/@item.Id">@item.Name</a></div>
+                                            <div class="price-box">
+                                                @if (item.PriceSale == 0)
+                                                {
+                                                    <div class="price-box pt-10">
+                                                        <span class="new-price new-price-2">
+                                                            @item.Price.Value.ToString("#,###", culture.NumberFormat)
+                                                            ₫
+                                                        </span>
+                                                    </div>
+
+                                                }
+                                                else
+                                                {
+                                                    <div class="price-box pt-10">
+                                                        <span class="new-price new-price-2">
+                                                            @item.PriceSale.Value.ToString("#,###", culture.NumberFormat)
+                                                            ₫
+                                                        </span>
+                                                        <span class="old-price">
+                                                            @item.Price.Value.ToString("#,###", culture.NumberFormat)
+                                                            ₫
+                                                        </span>
+                                                    </div>
+
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="add-actions">
+                                            <ul class="add-actions-link">
+                                                <li class="add-cart active"><a href="#" title="quick view" data-id="@item.Id" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter">Mua hàng</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- single-product-wrap end -->
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Section Area End Here -->
+        </div>
+    </div>
+</section>
+
+<div class="li-static-banner li-static-banner-3 text-center">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Single Banner Area -->
+            <div class="col-lg-12 col-md-12">
+                <div class="single-banner pb-xs-30">
+                    <a href="#">
+                        <img src="@imgImageHome.ElementAt(7).Image" alt="Li's Static Banner">
+                    </a>
+                </div>
+            </div>
+            <!-- Single Banner Area End Here -->
+         
+            
+           
+        </div>
+    </div>
+</div>
+<section class="product-area li-trending-product pt-60 pb-45 pt-xs-50">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Tab Menu Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <div class="header-name">
+                        <h4>
+                            <a href="">Phụ kiện</a>
+                        </h4>
+                    </div>
+                    @*<ul class="li-sub-category-list">
+                            <li class="active"><a href="shop-left-sidebar.html">Chamcham</a></li>
+                            <li><a href="shop-left-sidebar.html">Sanai</a></li>
+                            <li><a href="shop-left-sidebar.html">Meito</a></li>
+                        </ul>*@
+                </div>
+                <!-- Begin Li's Tab Menu Content Area -->
+                <div class="tab-content li-tab-content li-trending-product-content">
+                    <div id="home1" class="tab-pane show fade in active">
+                        <div class="row">
+                            <div class="product-active owl-carousel">
+                                @foreach (var item in productAccessories)
+                                {
+                                    <div class="col-lg-12">
+                                        <!-- single-product-wrap start -->
+                                        <div class="single-product-wrap">
+                                            <div class="product-image">
+                                                <a href="/san-pham/@item.Slug/@item.Id">
+                                                    <img src="@item.Image" alt="Li's Product Image">
+                                                </a>
+                                                @if (item.OldNew == 1)
+                                                {
+                                                    <span class="sticker">Mới</span>
+                                                }
+                                                else if (item.IsHot == 1)
+                                                {
+                                                    <span class="sticker">Nổi Bật</span>
+                                                }
+
+
+                                            </div>
+                                            <div class="product_desc">
+                                                <div class="product_desc_info">
+                                                    <div class="product-review">
+                                                        <h5 class="manufacturer">
+                                                            <a href="">Apple</a>
+                                                        </h5>
+                                                        <div class="rating-box">
+                                                            <ul class="rating">
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li><i class="fa fa-star-o"></i></li>
+                                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product_name"><a class="product_name_link" href="/san-pham/@item.Slug/@item.Id">@item.Name</a></div>
+                                                    @if (item.PriceSale == 0)
+                                                    {
+                                                        <div class="price-box pt-10">
+                                                            <span class="new-price new-price-2">
+                                                                @item.Price.Value.ToString("#,###", culture.NumberFormat)₫
+                                                            </span>
+                                                        </div>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="price-box pt-10">
+                                                            <span class="new-price new-price-2">
+                                                                @item.PriceSale.Value.ToString("#,###", culture.NumberFormat)₫
+                                                            </span>
+                                                            <span class="old-price">@item.PriceSale.Value.ToString("#,###", culture.NumberFormat)₫</span>
+                                                        </div>
+
+                                                    }
+                                                </div>
+                                                <div class="add-actions">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart active"><a href="#" title="quick view" data-id="@item.Id" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter">Mua hàng</a></li>
+
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- single-product-wrap end -->
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tab Menu Content Area End Here -->
+            </div>
+            <!-- Tab Menu Area End Here -->
+        </div>
+    </div>
+</section>

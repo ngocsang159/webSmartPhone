@@ -1,0 +1,92 @@
+﻿@model SmartPhone.Models.EF.Product;
+<style>
+    th:nth-child(1), td:nth-child(1) {
+        min-width: 200px;
+    }
+</style>
+<h4>Chi tiết thông tin danh mục sản phẩm</h4>
+<div class="row">
+    <div class="col-md-6">
+        <table>
+            <tr>
+                <th>Mã sản phẩm : </th>
+                <td>@Model.Name</td>
+            </tr>
+
+            <tr>
+                <th>Tên sản phẩm: </th>
+                <td>@Model.Slug</td>
+            </tr>
+
+            <tr>
+                <th>Ảnh đại diện : </th>
+                <td><img src="@Model.Image" alt="@Model.Name" width="100" height="100" style="object-fit:cover" /></td>
+            </tr>
+            <tr>
+                <th>Giá gốc:</th>
+                <td>@Model.Price</td>
+            </tr>
+            <tr>
+                <th>Giá gốc:</th>
+                <td>@Model.PriceSale</td>
+            </tr>
+            <tr>
+                <th>Mô tả : </th>
+                <td>@Model.Description</td>
+            </tr>
+            <tr>
+                <th>Nổi bật:</th>
+                <td>@Model.IsHot</td>
+            </tr>
+            <tr>
+                <th>Tình trạng:</th>
+                <td>@Model.OldNew</td>
+            </tr>
+            <tr>
+                <th>Màu sắc</th>
+                <td>@Model.IsHot</td>
+            </tr>
+            <tr>
+                <th>Số thứ tự : </th>
+                <td>@Model.Position</td>
+            </tr>
+
+            <tr>
+                <th>Ngày tạo : </th>
+                <td>@Model.CreatedDate</td>
+            </tr>
+
+            <tr>
+                <th>Người tạo : </th>
+                <td>@Model.CreatedBy</td>
+            </tr>
+
+            <tr>
+                <th>Người cập nhật : </th>
+                <td>@Model.UpdatedBy</td>
+            </tr>
+
+            <tr>
+                <th>Ngày cập nhật : </th>
+                <td>@Model.UpdatedDate</td>
+            </tr>
+
+            <tr>
+                <th>Trạng thái</th>
+                @if (Model.Status == 1)
+                {
+                    <td>Còn hàng</td>
+                }
+                else
+                {
+                    <td>Hết hàng</td>
+                }
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-6 h-100" style="overflow:scroll">
+        <div class="content">
+            @Html.Raw(Model.Content)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,155 @@
+﻿@model List<SmartPhone.Models.ViewModel.CartViewModel>
+@{
+    decimal total = 0;
+}
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        if (item.product.PriceSale == 0)
+        {
+            total += (item.product.Price.GetValueOrDefault(0) * item.Quantity);
+        }
+        else
+        {
+            total += (item.product.PriceSale.GetValueOrDefault(0) * item.Quantity);
+        }
+    }
+}
+@if (Model.Count > 0)
+{
+
+
+    <div class="col-main cart_desktop_page cart-page">
+        <div class="cart page_cart hidden-xs">
+            <form action="" method="POST">
+                <div class="bg-scroll">
+                    <div class="cart-thead" id="cart-update">
+                        <div style="width: 15%;" class="a-center">Ảnh sản phẩm</div>
+                        <div style="width: 28%;" class="a-center">Tên sản phẩm</div>
+                        <div style="width:7%" class="a-center">Màu sắc</div>
+                        <div style="width: 17%;" class="a-center">Đơn giá</div>
+                        <div style="width: 14%;" class="a-center">Số lượng</div>
+                        <div style="width: 14%;" class="a-center">Tổng tiền</div>
+                        <div style="width: 5%;" class="a-center">Xóa</div>
+                    </div>
+                    @foreach (var item in Model)
+                    {
+
+                        <div class="cart-tbody">
+                            <div class="item-cart product">
+                                <div style="width: 15%;" class="image">
+                                    <a href="" class="product-image">
+                                        <img src="@item.product.Image" alt="">
+                                    </a>
+                                </div>
+
+                                <div style="width: 28%;" class="a-center">
+                                    <h3 class="product-name"><a href="">@item.product.Name</a></h3>
+                                </div>
+                                <div style="width: 7%;" class="a-center">
+
+                                    <div class="color-item color " data-color="@item.color.Name" data-colorid="@item.color.Id" style="background-color:@item.color.Name;"></div>
+                                    @*<div class="mauKhac">
+                                            <div class="mau" style="@ba"></div>
+
+                                            </div>
+                                        </div>*@
+                                </div>
+                                <div style="width: 17%;" class="a-center p-def">
+                                    @if (item.product.PriceSale == 0)
+                                    {
+                                        <span class="item-price">
+                                            <span class="price" data-price-default="@item.product.Price.Value">@item.product.Price.Value.ToString("N0")₫</span>
+                                        </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span class="item-price">
+                                            <span class="price" data-price-default="@item.product.PriceSale.Value">@item.product.PriceSale.Value.ToString("N0")₫</span>
+                                        </span>
+                                    }
+
+                                </div>
+                                <div style="width: 14%;" class="a-center">
+                                    <div class="input_qty_pr">
+                                        <input class="variantID" type="hidden" name="variantId" value="7823812">
+                                        <input type="text" maxlength="12" min="0" class="check_number_here input-text number-sidebar input_pop input_pop qtyItem7823812 quanty" id="qtyItem7823812" name="Lines" size="4" data-id="@item.product.Id" value="@item.Quantity">
+                                        <button class="reduced_pop items-count btn-minus" type="button">+</button>
+                                        <button class="increase_pop items-count btn-plus"  type="button">-</button>
+                                        
+                                    </div>
+                                </div>
+                                <div style="width: 14%;" class="a-center price-pro">
+                                    <span class="cart-price">
+                                        @if (item.product.PriceSale == 0)
+                                        {
+                                            <span class="item-price">
+                                                <span class="price " data-price="@((item.product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))">@((item.product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))₫</span>
+                                            </span>
+
+                                        }
+                                        else
+                                        {
+                                            <span class="item-price">
+                                                <span class="price" data-price="@((item.product.PriceSale.GetValueOrDefault(0) * item.Quantity).ToString("N0"))">@((item.product.PriceSale.GetValueOrDefault(0) * item.Quantity).ToString("N0"))₫</span>
+                                            </span>
+                                        }
+
+                                    </span>
+                                </div>
+                                <div style="width: 5%;" class="a-center">
+                                    <a href="/xoa-don-hang/@item.product.Id" class="remove" title="Xóa">
+                                        <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </form>
+            <div class="row margin-top-25 margin-bottom-40">
+                <div class="col-lg-7 col-md-7">
+                    <div>
+                        <a href="/" class="form-cart-continue" title="Tiếp tục mua hàng">Tiếp tục mua hàng </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-5 bg_cart sshopping-cart">
+                    <div class="total">
+                        <p class="text-total">Tổng số tiền thanh toán :</p>
+                        <span class="price" id="totalPrice" data-sum="@total.ToString("N0")">@total.ToString("N0")₫</span>
+                    </div>
+                    <a href="/dat-hang/thanh-toan" class="btn-checkout-cart" title="Tiến hành thanh toán">
+                        Tiến hành thanh toán
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="order-wrap">
+        <div class="row">
+            <div class="col-md-8 table-cart-wrapper">
+                <div class="cart_img">
+                    <img src="~/css/images/icon/cart1.png" />
+                </div>
+                <div class="cart_infor">
+                    <div class="cart_txt">
+                        <p>
+                            Hiện chưa có sản phẩm nào trong giỏ hàng, mời bạn tiếp tục tham quan và lựa chọn sản phẩm ứng ý.
+                        </p>
+                    </div>
+                    <div class="cart_txt1">
+                        <p>Phần còn lại chúng tôi sẽ giúp bạn!</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+}
+

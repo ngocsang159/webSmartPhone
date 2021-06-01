@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var imgImageHome = ViewBag.imgPage as IEnumerable<SmartPhone.Models.EF.ImageInPage>;
+}
+
+<!-- Header Area End Here -->
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                    <li><a href="/"><i class="fa fa-home"></i>Trang chủ</a></li>
+               
+                   
+                        <li class="active"><a href=""> @ViewBag.categoryName</a></li>
+                   
+                   
+
+                </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Li's Content Wraper Area -->
+<div class="content-wraper pt-60 pb-60 pt-sm-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 order-1 order-lg-2">
+                <!-- Begin Li's Banner Area -->
+                <div class="single-banner shop-page-banner">
+                    <a href="">
+                        <img src="@imgImageHome.ElementAt(0).Image" />
+
+                    </a>
+                </div>
+                <!-- Li's Banner Area End Here -->
+                <!-- shop-top-bar start -->
+                <div class="shop-top-bar mt-30">
+                    <div class="shop-bar-inner">
+                        <div class="product-view-mode">
+                            <!-- shop-item-filter-list start -->
+                            <ul class="nav shop-item-filter-list" role="tablist">
+                                <li class="active" role="presentation"><a aria-selected="true" class="active show" data-toggle="tab" role="tab" aria-controls="grid-view" href="#grid-view"><i class="fa fa-th"></i></a></li>
+
+                            </ul>
+                            <!-- shop-item-filter-list end -->
+                        </div>
+                    </div>
+                    <!-- product-select-box start -->
+                    <div class="product-select-box">
+                        <div class="product-short">
+                            <p>Sắp xếp theo:</p>
+                            <select class="nice-select" id="listProdFor" data-idcate="@ViewBag.idCategory">
+                                <option value="">Liên quan</option>
+                                <option value="1">Tên Sản Phẩm (A - Z)</option>
+                                <option value="2">Giá Thấp</option>
+                                <option value="3">Giá Cao</option>
+                                <option value="4">Giá ưu đãi</option>
+                                <!-- <option value="price-asc">Model (Z - A)</option> -->
+                            </select>
+                        </div>
+                    </div>
+                    <!-- product-select-box end -->
+                </div>
+                <!-- shop-top-bar end -->
+                <!-- shop-products-wrapper start -->
+                <div class="shop-products-wrapper">
+                    <div class="tab-content">
+                        <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
+                            <div class="product-area shop-product-area">
+                                <div class="row" id="productCategory">
+
+                                    <!--View data-->
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- shop-products-wrapper end -->
+                <div class="paginatoin-area">
+                    <div class="row">
+                        <!--Phân trang-->
+                        <div class="col-lg-6 col-md-6 pt-xs-15">
+                            <p>Có @ViewBag.Total sản phẩm</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 pt-xs-15">
+
+
+                            @*int totalPage = (int)ViewBag.TotalPage;
+                    int totalRecord = (int)ViewBag.Total;
+                    <p>Có <strong>@totalRecord</strong> sản phẩm trong <strong>@totalPage</strong> trang</p>
+            </div>
+                }*@
+
+                                <ul class="pagination-box pt-xs-20 pb-xs-15">
+
+                                    <li>
+                                        <a href="" class="Previous"><i class="fa fa-chevron-left"></i></a>
+                                    </li>
+                                    <li class="active"><a href="">1</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li>
+                                        <a href="" class="Previous"><i class="fa fa-chevron-right"></i></a>
+                                    </li>
+
+                                </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+<!-- Content Wraper Area End Here -->

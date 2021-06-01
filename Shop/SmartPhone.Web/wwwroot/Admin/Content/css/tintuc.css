@@ -1,0 +1,69 @@
+﻿* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    list-style: none;
+}
+
+html {
+    font-size: 16px;
+}
+
+section.contact{
+    background: url(../images/images/tin-tuc/background-tintuc.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+/*    height : 100vh;*/
+    
+}
+/*.d_news{
+}*/
+.d_news .d_image img {
+    width: 100%;
+}
+
+.d_content p {
+    font-size: 0.8rem;
+    font-family: "SVN-Athena";
+}
+
+.d_name {
+    height: 4rem;
+}
+
+    .d_name h6 a {
+        color: #d8ddb8;
+        font-size: 1.2rem;
+        text-decoration: none;
+    }
+
+
+.post {
+    background-image: url(../images/images/tin-tuc/background-tintuc.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.title-post h1{
+    font-size : 1.5rem;
+    color :#d8ddb8;
+}
+.content{
+    font-size : 0.9rem;
+}
+.new {
+    margin-bottom: 20px;
+}
+    .new img {
+        height: auto;
+    }
+    .new .desc {
+        margin: 0;
+        padding : 0;
+    }
+    .new .desc a{
+        color:#000;
+        text-decoration: none;
+        font-size : 0.8rem;
+        line-height : 0.8rem;
+       
+    }

@@ -1,0 +1,243 @@
+﻿@model SmartPhone.Models.EF.New;
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .input-group-prepend, .input-group-prepend > span {
+        width: 120px !important;
+    }
+
+    .form-group label {
+        cursor: pointer;
+    }
+
+    h6 span {
+        color: #495057;
+        font-size: 1.1rem;
+        font-weight: 400;
+        line-height: 1.2;
+        padding: 2rem 0rem;
+    }
+</style>
+
+
+
+<div class="show-table">
+    <div class="container-fluid objInfor pl-3 pr-3">
+        <div class="showModal">
+            <!--Xem chi tiết -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-1 objnews">
+            <input type="hidden" name="ID" value="@Model.Id" id="ID" />
+            <div class="col-md-9 mb-1">
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Tên bài viết</span>
+                        </div>
+                        <input type="text" name="Name" class="form-control" id="Name" value="@Model.Name" maxlength="250" autofocus>
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Số thứ tự</span>
+                        </div>
+                        <input type="number" name="Position" class="form-control" id="Position" value="@Model.Position" min="0" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+
+                <div class="mb-3 textEditor">
+                    <h6 class=" mb-1">Mô tả bài viết</h6>
+                    <textarea name="Description" id="description" rows="5" class="form-control">@Model.Description</textarea>
+                    <div class="text-danger"></div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-1">
+                <h6 class="input-group-text">Ảnh đại diện</h6>
+                <input type="hidden" name="Image" value="@Model.Image" id="image" />
+                <img src="@Model.Image" class="img-size" alt="Cập nhật" style="object-fit:cover" id="show-img" />
+                <div class="text-danger"></div>
+            </div>
+        </div>
+        <div class="row mb-3 objnews textEditor">
+            <div class="col-md-12 mb-3">
+                <div>
+                    <h6 class=" mb-1"><span>Nội dung chi tiết</span></h6>
+                    <textarea name="Content" id="Content" class="ckeditor">@Html.Raw(Model.Content)</textarea>
+                    <div class="text-danger"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold mr-2">Trạng thái </label>
+            <input type="radio" name="Status" id="s1" @if (Model.Status == 1) { <text> checked</text>} /><label class="ml-2 mr-5" for="s1">Hiển thị</label>
+            <input type="radio" name="Status" id="s2" @if (Model.Status == 0) { <text> checked</text>} /><label class="ml-2" for="s2">Lưu tạm</label>
+        </div>
+
+    </div>
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div class="col-md-12 text-right mr-0 pr-0 mt-1 mb-5 modal-footer">
+                <button type="button" class="btn btn btn-red btnBack"><i class="fas fa-reply-all"></i> Bỏ qua</button>
+                <button type="button" class="btn btn-success btnSave" onclick=""> <i class="far fa-save"></i> Lưu lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+        OpenFolderImage();
+            Save();
+            $(".btnBack").click(function () {
+            location.href = "/Admin/New/Index/"+@ViewBag.ParentId;
+        })
+        function OpenFolderImage() {
+            $('#show-img').click(function () {
+                $.ajax({
+                    url: "/Admin/Home/ReadFileBrower",
+                    data: {},
+                    type: "get",
+                    dataType: 'html',
+                    success: function (res) {
+                        $('#myModal .modal-body').html('');
+                        $('#myModal .modal-body').append(res);
+                        if (!$('#myModal').hasClass('show')) {
+                            $('#myModal').modal('show')
+                            ChooseImage();
+                        }
+                    }
+                });
+            })
+        }
+
+        function ChooseImage() {
+            $('#fileExploer').on('click', 'img', function () {
+                var fileUrl = '/Upload/Image/' + $(this).attr('title');
+                $('#show-img').attr('src', fileUrl);
+                $('#image').val(fileUrl);
+                // ẩn modal đi
+                $('#myModal').modal('hide');
+            }).hover(function () {
+                $(this).css('cursor', 'pointer')
+            })
+        }
+
+        function Save() {
+            $(document).on('click', '.btnSave', function () {
+                let news = new Object();
+                $('.objnews input[type="text"],.objnews input[type="number"], .objnews input[type="hidden"]').each(function () {
+                    news[$(this).attr('name')] = $(this).val();
+                });
+
+                $('.objInfor textarea').each(function () {
+                    news[$(this).attr('name')] = $(this).val();
+                });
+                news["Content"] = CKEDITOR.instances["Content"].getData();
+                news["Status"] = $('#s1').is(':checked') == 1 ? 1 : 0;
+                console.log(news);
+                if (CheckValidate()) {
+                    debugger
+                    $.ajax({
+                        url: '/Admin/New/AddOrUpdate',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        news: news
+                    },
+                    beforeSend: function () {
+                    },
+                        success: function (res) {
+                            if (res == true) {
+                            swal({
+                                title: "Thông báo",
+                                text: 'Chỉnh sửa dữ liệu thành công.',
+                                icon: "success",
+                                dangerMode: true,
+                            }).then(() => {
+
+                            });
+                        } else {
+                            swal({
+                                title: "Thông báo",
+                                text: 'Đã xảy ra lỗi khi sửa đổi dữ liệu',
+                                icon: "warning",
+                                dangerMode: true,
+                            });
+                        }
+                    },
+                    error: function () {
+
+                    },
+                    complete: function () {
+
+                    }
+                })
+                }
+
+            });
+        }
+        })
+
+
+        function CheckValidate() {
+            let check = 0;
+            $('.text-danger').html('');
+            $('.objnews input').each(function () {
+                let value = $(this).val();
+                if (value == '') {
+                    console.log($(this));
+                    check++;
+                    let title = $(this).siblings().children('span').text();
+                    $(this).parent().siblings('.text-danger').append(title + ' không được để trống');
+                }
+                if ($(this).attr('name') == "Image" && $(this).val() == "/Upload/Image/no-image.jpg") {
+                    let title = $(this).siblings('h6').text();
+                    $(this).siblings('.text-danger').append(title + ' không được để trống');
+                    check++;
+                }
+            })
+
+            $('.objnews textarea').each(function () {
+                let value = $(this).val();
+                if (value=='' && !$(this).hasClass('ckeditor')) {
+                    check++;
+                    let title = $(this).siblings('h6').text();
+                    $(this).siblings('.text-danger').append(title + ' không được để trống');
+                }
+                else if ($(this).hasClass('ckeditor')) {
+                    value = CKEDITOR.instances[$(this).attr('id')].getData();
+                    if (value == '') {
+                        let title = $(this).siblings('h6').text();
+                        $(this).siblings('.text-danger').append(title + ' không được để trống');
+                        check++;
+                    }
+
+                }
+            })
+            return check == 0;
+        }
+    </script>
+}

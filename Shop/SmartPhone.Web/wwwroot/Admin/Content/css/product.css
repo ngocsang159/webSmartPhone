@@ -1,0 +1,115 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    text-decoration: none;
+}
+
+html {
+    font-size: 16px;
+}
+
+.sanham {
+    background: url(../images/images/san-pham/banner.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+    .sanham .padd {
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+    }
+
+.address span a, .d_note1 p {
+    color: #d7d7d7;
+}
+
+.d_option option {
+    border: 1px solid #ccc;
+    padding-left: 0.3rem;
+}
+
+.product hr {
+    color: #ccc;
+    height: 1.5px;
+    margin-right: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+.d_loai ul li input {
+    margin: 5px 0.5rem 0rem 0rem;
+    border: 2px solid #ccc !important;
+    border-radius: 3px;
+}
+
+.d_loai ul li label {
+    font-size: 0.9rem;
+    color: #000;
+}
+
+.d_price p {
+    font-size: 0.9rem;
+    color: #7a7a7a;
+}
+
+.d_new {
+    height: 2rem;
+    margin-top: -0.6rem;
+    padding: 2px 0.6rem;
+    border-radius: 2px;
+    width: 3rem;
+    background-color: #d4f59b;
+}
+
+.d_trong-luong select {
+    border: none;
+    margin-left: 1rem;
+}
+
+.d_img-sp img {
+    width: 100%;
+}
+
+.d_trong-luong option p {
+    color: #ccc;
+}
+
+ .page-link {
+    border: 1px solid #69922b;
+    padding: 0.3rem 0.5rem;
+    color: black;
+    border-radius: 1px !important;
+    text-align :center;
+}
+ .active {
+    color: #69922b;
+}
+
+.pagination li{
+    width: 2rem;
+    height: 2rem;
+    margin :0px 0.3rem;
+}
+
+.vote i {
+    font-size: 10px;
+}
+#slider-range
+{
+    height :3px;
+}
+#slider-range div.ui-widget-header {
+    height: 3px;
+}
+
+#slider-range > span{
+    width : 10px;
+    height : 10px;
+    border-radius : 0%;
+    top : -3px;
+    left : 5%;
+}
+    #slider-range > span:focus {
+        background : #898989;
+        border : 0px solid #898989;
+    }

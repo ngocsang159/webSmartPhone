@@ -1,0 +1,132 @@
+﻿@model SmartPhone.Models.EF.ProductSpecification;
+<style>
+    th:nth-child(1), td:nth-child(1) {
+        min-width: 200px;
+    }
+</style>
+<h4>Chi tiết thông số kỹ thuật</h4>
+<table>
+    <tr>
+        <th>Tiêu đề : </th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td>Thiết kế</td>
+        <td>@Model.Design</td>
+    </tr>
+    <tr>
+        <td>Kích thước</td>
+        <td>@Model.Size</td>
+    </tr>
+    <tr>
+        <th>Màn hình : </th>
+        <td>@Model.Screen</td>
+    </tr>
+    <tr>
+        <th>Độ phân giải màn hình : </th>
+        <td>@Model.ScreenResolution</td>
+    </tr>
+    <tr>
+        <th>Màn hình rộng : </th>
+        <td>@Model.WideScreen</td>
+    </tr>
+
+    <tr>
+        <th>Camera sau: </th>
+        <td>@Model.CameraRear</td>
+    </tr>
+
+    <tr>
+        <th>Camera Selfie: </th>
+        <td>@Model.CameraSelfie</td>
+    </tr>
+    <tr>
+        <th>RAM: </th>
+        <td>@Model.Ram</td>
+    </tr>
+    <tr>
+        <th>Thẻ nhớ : </th>
+        <td>@Model.CardMemory</td>
+    </tr>
+
+    <tr>
+        <th>Bộ nhớ: </th>
+        <td>@Model.Memory</td>
+    </tr>
+    <tr>
+        <th>CPU: </th>
+        <td>@Model.Cpu</td>
+    </tr>
+    <tr>
+        <th>Tốc độ CPU: </th>
+        <td>@Model.SpeedCpu</td>
+    </tr>
+    <tr>
+        <th>GPU: </th>
+        <td>@Model.Gpu</td>
+    </tr>
+    <tr>
+        <th>Dung lượng pin: </th>
+        <td>@Model.Battery</td>
+    </tr>
+    <tr>
+        <th>Cổng sạc : </th>
+        <td>@Model.ChargingPort</td>
+    </tr>
+    <tr>
+        <th>Jack cắm tai nghe: </th>
+        <td>@Model.JackHeadphone</td>
+    </tr>
+    <tr>
+        <th>Thẻ Sim: </th>
+        <td>@Model.Sim</td>
+    </tr>
+    <tr>
+        <th>Kết nối mạng : </th>
+        <td>@Model.Network</td>
+    </tr>
+    <tr>
+        <th>Hệ điều hành: </th>
+        <td>@Model.Os</td>
+    </tr>
+    <tr>
+        <th>Sản xuất tại: </th>
+        <td>@Model.MadeIn</td>
+    </tr>
+    <tr>
+        <th>Thời gian: </th>
+        <td>@Model.LaunchTime</td>
+    </tr>
+    <tr>
+        <th>Người tạo : </th>
+        <td>@Model.CreatedBy</td>
+    </tr>
+
+    <tr>
+        <th>Ngày tạo : </th>
+        <td>@Model.CreatedDate</td>
+    </tr>
+
+    <tr>
+        <th>Người cập nhật : </th>
+        <td>@Model.UpdatedBy</td>
+    </tr>
+
+    <tr>
+        <th>Ngày cập nhật : </th>
+        <td>@Model.UpdatedDate</td>
+    </tr>
+
+    <tr>
+        <th>Trạng thái</th>
+        @if (Model.Status == 1)
+        {
+            <td><span class="badge badge-success">Hoạt động</span></td>
+        }
+        else
+        {
+            <td><span class="badge badge-danger">Ngừng hoạt động</span></td>
+        }
+    </tr>
+</table>
+

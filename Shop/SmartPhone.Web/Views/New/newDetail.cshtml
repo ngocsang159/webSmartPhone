@@ -1,0 +1,235 @@
+﻿@using SmartPhone.Models.EF;
+@model SmartPhone.Models.EF.New;
+@{
+    ViewData["Title"] = "Chi tiết tin tức";
+    var lstCategoryNew = ViewBag.GetCategoryNew as IEnumerable<New>;
+    var lstNewSample = ViewBag.GetListNewSample as IEnumerable<New>;
+    var lstNewSide = ViewBag.GetListNewSide as IEnumerable<New>;
+    var getCategoryNew = ViewBag.Category;
+    var newDetail = (New)ViewBag.NewDetail;
+}
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/"><i class="fa fa-home"></i>Trang chủ</a></li>
+                <li class=""><a href="/tin-tuc">Tin tức</a></li>
+                <li class="active"><a href="">@getCategoryNew</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Li's Main Blog Page Area -->
+<div class="li-main-blog-page pt-20 pb-45">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8  order-1">
+                <div class="row li-main-content new-detail">
+
+                    <div class="td-post-title">
+                        <h1 class="entry-title">
+                            @newDetail.Name
+                        </h1>
+
+                        <div class="content-title-underlined"></div>
+                        <div class="td-module-meta-info">
+                            <!-- author -->
+                            @*<div class="td-post-author-name">
+                    <div class="td-author-by">Bởi</div> <a href="">Le Thu</a>
+                    <div class="td-author-line"> - </div>
+                </div>*@ <!-- date -->
+                            <div class="td-post-date">
+                                <img src="~/css/images/menu/flag-icon/carlen.png" />
+                                <span class="entry-date updated td-module-date">@(newDetail.CreatedDate.HasValue ? newDetail.CreatedDate.Value.ToString("dd/MM/yyyy") :DateTime.Now.ToString("dd/MM/yyyy"))</span>
+                            </div>
+                            <!-- views -->
+                            <div class="td-post-views">
+                                <img src="~/css/images/menu/flag-icon/eye.png" />
+                                <span class="td-nr-views-123077">@newDetail.Views</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="td-post-sharing-top">
+                        <div class="facebook"><i class="fa fa-facebook-f"></i></div>
+                        <div class="twitter"><i class="fa fa-twitter"></i></div>
+                        <div class="google-plus"><i class="fa fa-google-plus"></i></div>
+                    </div>
+
+                    <div class="td-post-content tagdiv-type">
+                        <!-- image -->
+                        <div class="td-post-featured-image">
+                            <a href="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2021/04/14.5-on-iPhone-12-feature-2.jpg"
+                               data-caption="" class="td-modal-image">
+                                <img width="696" height="391"
+                                     class="entry-thumb"
+                                     src="@newDetail.Image"
+                                     srcset="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2021/04/14.5-on-iPhone-12-feature-2-696x391.jpg 696w, https://hoanghamobile.com/tin-tuc/wp-content/uploads/2021/04/14.5-on-iPhone-12-feature-2-300x169.jpg 300w, https://hoanghamobile.com/tin-tuc/wp-content/uploads/2021/04/14.5-on-iPhone-12-feature-2-1024x576.jpg 1024w, https://hoanghamobile.com/tin-tuc/wp-content/uploads/2021/04/14.5-on-iPhone-12-feature-2-768x432.jpg 768w, https://hoanghamobile.com/tin-tuc/wp-content/uploads/2021/04/14.5-on-iPhone-12-feature-2-1536x864.jpg 1536w, https://hoanghamobile.com/tin-tuc/wp-content/uploads/2021/04/14.5-on-iPhone-12-feature-2-2048x1152.jpg 2048w, https://hoanghamobile.com/tin-tuc/wp-content/uploads/2021/04/14.5-on-iPhone-12-feature-2-1068x601.jpg 1068w, https://hoanghamobile.com/tin-tuc/wp-content/uploads/2021/04/14.5-on-iPhone-12-feature-2-747x420.jpg 747w"
+                                     sizes="(max-width: 696px) 100vw, 696px" alt="14.5-on-iPhone-12-feature-2"
+                                     title="14.5-on-iPhone-12-feature-2">
+                            </a>
+                        </div>
+                        <!-- content -->
+                        <div class="content-new-detail">
+                            @Html.Raw(newDetail.Content)
+                        </div>
+
+                    </div>
+
+                    <div id="end-fixed"></div>
+                    <div class="newSample">
+                        <h4>
+                            <a href="">BÀI VIẾT LIÊN QUAN</a>
+                        </h4>
+                        <div class="td-block-inner">
+                            <div class="td-related-row">
+                                @foreach (var item in lstNewSample)
+                                {
+                                    <div class="td-related-span4 col-lg-4">
+                                        <div class="td-module">
+                                            <div class="td-module-image">
+                                                <div class="td-module-thumb">
+                                                    <a href="" rel="bookmark" class="td-image-wrap" title=""><img width="218" height="150" class="entry-thumb" src="@item.Image"  sizes="(max-width: 218px) 100vw, 218px" alt="doanh thu smartphone toàn cầu" title="@item.Name"></a>
+                                                </div>
+                                            </div>
+                                            <div class="item-detail">
+                                                <h3 class="entry-title td-module-title">
+                                                    <a href="">
+                                                        @if (item.Name.Length > 70)
+                                                        {
+                                                            item.Name = Model.Name.Substring(0, 67) + "...";
+                                                        }
+                                                        @Model.Name
+                                                    </a>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Begin Li's Blog Sidebar Area -->
+            <div class="col-lg-4 order-2">
+                <div class="li-blog-sidebar-wrapper" id="start-fixed">
+                    <div class="li-blog-sidebar">
+                        <h4 class="li-blog-sidebar-title">Danh mục tin tức</h4>
+                        <ul class="li-blog-archive">
+                            @foreach (var item in lstCategoryNew)
+                            {
+                                <li><a href="/tin-tuc/@item.Slug/@item.Id">@item.Name</a></li>
+                            }
+
+
+                        </ul>
+                    </div>
+                    <div class="li-blog-sidebar">
+                        <h4 class="li-blog-sidebar-title blog-title">
+                            <span>Bài viết mới</span>
+                        </h4>
+                        <div class="td-block-span12">
+                            <div class="td_module_2 td_module_wrap td-animation-stack">
+                                <div class="td-module-image">
+                                    <div class="td-module-thumb">
+                                        <a href=""
+                                           rel="bookmark" class="td-image-wrap"
+                                           title="Thêm hình ảnh cho thấy notch trên iPhone 13 5G sẽ được thu nhỏ đáng kể!">
+                                            <img width="324" height="160" class="entry-thumb"
+                                                 src="@Model.Image"
+                                         
+                                                 sizes="(max-width: 324px) 100vw, 324px"
+                                                 alt="notch trên iPhone 13 5G"
+                                                 title="@Model.Name">
+                                        </a>
+                                    </div>
+                                    <a href=""
+                                       class="td-post-category">Tin hot</a>
+                                </div>
+                                <h3 class="entry-title td-module-title">
+                                    <a href=""
+                                       rel="bookmark"
+                                       title="Thêm hình ảnh cho thấy notch trên iPhone 13 5G sẽ được thu nhỏ đáng kể!">
+                                        @if (Model.Name.Length > 70)
+                                        {
+                                            Model.Name = Model.Name.Substring(0, 67) + "...";
+                                        }
+                                        @Model.Name
+                                    </a>
+                                </h3>
+
+                                <div class="td-module-meta-info">
+                                    <span class="td-post-date">
+                                        <time class="entry-date updated td-module-date"
+                                              datetime="2021-04-18T12:31:02+00:00">@(Model.CreatedDate.HasValue ? Model.CreatedDate.Value.ToString("dd/MM/yyyy") :DateTime.Now.ToString("dd/MM/yyyy"))</time>
+                                    </span>
+                                </div>
+
+
+                                <div class="td-excerpt">
+                                    @if (Model.Description.Length > 120)
+                                    {
+                                        Model.Description = Model.Description.Substring(0, 108) + "....";
+                                    }
+
+                                    @Model.Description
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                        @foreach (var item in lstNewSide)
+                        {
+                            <div class="li-recent-post pb-15">
+                                <div class="li-recent-post-thumb">
+                                    <a href="blog-details-left-sidebar.html">
+                                        <img class="img-full" src="@item.Image"
+                                             alt="@item.Name">
+                                    </a>
+                                </div>
+                                <div class="li-recent-post-des">
+                                    <span>
+                                        @if (item.Name.Length > 40)
+                                        {
+                                            item.Name = item.Name.Substring(0, 40) + "...";
+                                        }
+
+                                        <a href="blog-details-left-sidebar.html"> @item.Name</a>
+                                    </span>
+                                    <div class="td-module-meta-info">
+                                        @*<a href="" class="td-post-category">@ViewBag.categoryName</a>*@
+                                        <div class="news-time">
+                                            <img src="~/css/images/menu/flag-icon/clock1.png" />
+                                            <span class="li-post-date">
+                                                @(item.CreatedDate.HasValue ?
+                                                item.CreatedDate.Value.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy"))
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- Li's Blog Sidebar Area End Here -->
+            <!-- Begin Li's Main Content Area -->
+            <!-- Li's Main Content Area End Here -->
+        </div>
+    </div>
+</div>

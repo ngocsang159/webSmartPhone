@@ -1,0 +1,132 @@
+﻿/*Css Chức năng*/
+td.box-right {
+    border-left: 2px solid #ddd !important;
+    width: 45px;
+}
+
+.box-over {
+    position: relative;
+    text-align: center;
+    min-width: 30px;
+}
+
+    .box-over .setting-row {
+
+        border-radius: 3px;
+        height: 25px;
+        padding: 2px 4px;
+        cursor: pointer;
+        margin-bottom: -1px;
+        position: relative;
+    }
+
+.setting-row i {
+    font-size: 16px
+}
+
+.list-to-left {
+    transform: translate(-75%, -54%);
+}
+
+.function-item {
+    /* border: 1px solid #000; */
+    position: absolute;
+    background-color: #bbbb;
+    border-radius: 3px;
+    z-index: 999;
+    /* transform: translate(-14%, 2%); */
+    width: 50px;
+}
+.list-to-left:after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 25px;
+    left: 49px;
+    border-left: 9px solid #bbbbbb;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+}
+.function-item .list-function {
+    list-style: none;
+    padding: 0;
+    margin: 2px 0;
+}
+
+        .function-item .list-function > li {
+            padding: 3px 6px;
+        }
+
+.style-button {
+    width: 22px;
+    height: 22px;
+    position: relative;
+    /*margin-left: 2px;*/
+    /*justify-content: space-around;*/
+}
+
+    .style-button i {
+        font-size: 14px;
+        position: absolute;
+        top: 15%;
+        left: 25%;
+    }
+
+.bcgwhite {
+    color: white;
+}
+/*.show {
+    opacity: 1;
+    visibility: visible;
+    animation: hienthi 0.4s forwards;
+}*/
+.d-none {
+    display: none !important;
+}
+
+/**Phân trang*/
+.pagination-container{
+    display:flex;
+    padding-top:10px;
+
+}
+    .pagination-container .pagination li.active a {
+        background-color: #f53d2d !important;
+        color: #fff;
+       
+    }
+    .pagination-container .pagination li a {
+        padding-top: 2px;
+        width: 25px;
+        height: 25px;
+        display: block;
+        text-align: center;
+        border-radius: 50%;
+        font-weight: 600;
+    }
+/**
+   Form nhập
+*/
+.objInfor label{
+    color:#000000;
+}
+.form-control{
+    border-radius:5px!important;
+}
+.form-control:focus {
+    border: 1px solid #019160 !important;
+}
+/*
+    Table
+*/
+td span {
+    font-size: 11px !important;
+    font-weight: 400;
+    text-align: center;
+}
+thead tr th:last-child {
+    text-align: center !important;
+}
+td.price{
+    text-align:right!important;
+}

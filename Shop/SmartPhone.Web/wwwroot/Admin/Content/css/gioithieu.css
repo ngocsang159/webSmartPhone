@@ -1,0 +1,44 @@
+﻿* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    text-decoration: none;
+}
+
+html {
+    font-size: 16px;
+}
+
+.banner img {
+    width: 100%;
+}
+
+.banner .bgr {
+    position: relative;
+}
+
+.banner .headding {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+}
+
+    .banner .headding h4 {
+        /*font-size: 1*/
+    }
+
+.infor {
+    content: '';
+    background: url(../images/images/gioi-thieu/banner02.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+    .infor .content img {
+        width: 100%;
+    }
+
+.content-intro{
+    font-size : 1.08rem;
+}

@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LayoutLoginClient.cshtml";
+}
+
+<form action="" method="POST" class="form" id="form-register-client">
+    <h3 class="heading">Đăng Ký Thành Viên</h3>
+    <p class="desc">Nơi mua sắm đáng tin cậy - Bạn của mọi nhà ❤️</p>
+    <div class="login">
+        <div class="_3SZqDE">
+            <span class="_39jZa0">Bạn đã có tài khoản?</span>
+            <a href="dang-nhap-tai-khoan" class="_1gLe-h">Đăng nhập</a>
+        </div>
+    </div>
+    <div class="form-group " hidden>
+        <input type="number" name="Id" class="form-control" id="Id" value="0">
+    </div>
+    <div class="form-group">
+        <label for="name" class="form-label">Họ và Tên</label>
+        <input id="Name" name="Name" type="text" placeholder="VD: Ngọc Sáng" class="form-control">
+        <span class="form-message"></span>
+    </div>
+    <div class="form-group">
+        <label for="phone" class="form-label">Số điện thoại</label>
+        <input id="Phone" name="Phone" type="number" placeholder="0383515382" class="form-control" min="0" maxlength="11">
+        <span class="form-message"></span>
+    </div>
+    <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input id="Email" name="Email" type="text" placeholder="VD: email@domain.com" class="form-control">
+        <span class="form-message"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Password" class="form-label">Mật khẩu</label>
+        <input id="Password" name="Password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+        <span class="form-message"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+        <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" type="password" class="form-control">
+        <span class="form-message"></span>
+    </div>
+
+    <button class="form-submit" type="button" id="btnRegister">Đăng Ký</button>
+    <div class="policy">
+        <span>Bằng việc đăng ký, bạn đã đồng ý với Lx-Mobible về <a href="chinh-sach" class="_1WCser"> Điều khoản và dịch vụ </a> & <a href="" class="_1WCser">Chính sách bảo mật</a></span>
+    </div>
+
+</form>
+

@@ -1,0 +1,56 @@
+﻿@model SmartPhone.Models.EF.ResponseDataAdmin<SmartPhone.Models.EF.New>
+<div class="row1 list-category-new" id="searchNewByCate" data-pagecount="@Model.pageCount" data-pagenumber="@Model.pageNumber">
+    @foreach (var item in Model.data)
+    {
+        <div class="col-lg-3 col-md-3 col-sm-6 mt-40">
+            <div class="li-blog-single-item pb-25">
+                <div class="li-blog-banner">
+                    <a href="blog-details-left-sidebar.html">
+                        <img class="img-full"
+                             src="@item.Image" alt="">
+                    </a>
+                </div>
+                <div class="li-blog-content">
+                    <div class="li-blog-details">
+
+                        <div class="li-blog-meta">
+                            <a class="post-time" href="#">
+                                <img src="~/css/images/menu/flag-icon/carlen.png" />
+
+                                <span>@(item.CreatedDate.HasValue ? item.CreatedDate.Value.ToString("dd/MM/yyyy") :DateTime.Now.ToString("dd/MM/yyyy"))</span>
+                            </a>
+                            <a href="post-view">
+                                <img src="~/css/images/menu/flag-icon/eye.png" />
+
+                                <span>@item.Views</span>
+
+                            </a>
+                        </div>
+                        <div class="new-info">
+                            <div class="entry-title td-module-title">
+                                <a href="/chi-tiet-tin-tuc/@item.Slug/@item.Id">
+                                    @if (item.Name.Length > 70)
+                                    {
+                                        item.Name = item.Name.Substring(0, 67) + "...";
+                                    }
+                                    @item.Name
+                                </a>
+                            </div>
+                            <div class="td-excerpt">
+                                @if (item.Description.Length > 120)
+                                {
+                                    item.Description = item.Description.Substring(0, 108) + "....";
+                                }
+
+                                @item.Description
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

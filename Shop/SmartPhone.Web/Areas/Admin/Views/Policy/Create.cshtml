@@ -1,0 +1,205 @@
+﻿
+@{
+    ViewData["Title"] = "Thêm mới chính sách";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .input-group-prepend, .input-group-prepend > span {
+        width: 120px !important;
+    }
+
+    .form-group label {
+        cursor: pointer;
+    }
+
+    h6 span {
+        color: #495057;
+        font-size: 1.1rem;
+        font-weight: 400;
+        line-height: 1.2;
+        padding: 2rem 0rem;
+    }
+</style>
+
+
+
+<div class="show-table">
+    <div class="container-fluid objInfor pl-3 pr-3">
+        <div class="showModal">
+            <!--Xem chi tiết -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-1 objnews">
+            <input type="hidden" name="ID" value="0" id="ID" />
+            <div class="col-md-9 mb-1">
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Tên chính sách</span>
+                        </div>
+                        <input type="text" name="Name" class="form-control" id="Name" maxlength="250" autofocus>
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+                @*<div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Điều hướng</span>
+                        </div>
+                        <input type="text" name="Slug" class="form-control" id="Slug" maxlength="250">
+                    </div>
+                    <div class="text-danger"></div>
+                </div>*@
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Số thứ tự</span>
+                        </div>
+                        <input type="number" name="Position" class="form-control" id="Order" value="0" min="0" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3 objnews textEditor">
+            <div class="col-md-12 mb-3">
+                <div>
+                    <h6 class=" mb-1"><span>Nội dung chi tiết</span></h6>
+                    <textarea name="Content" id="Content" class="ckeditor"></textarea>
+                    <div class="text-danger"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold mr-2">Trạng thái </label>
+            <input type="radio" name="Status" id="s1" checked /><label class="ml-2 mr-5" for="s1">Hiển thị</label>
+            <input type="radio" name="Status" id="s2" /><label class="ml-2" for="s2">Lưu tạm</label>
+        </div>
+
+    </div>
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div class="col-md-12 text-right mr-0 pr-0 mt-1 mb-5 modal-footer">
+                <button type="button" class="btn btn btn-red btnBack"><i class="fas fa-reply-all"></i> Bỏ qua</button>
+                <button type="button" class="btn btn-success btnSave" onclick=""> <i class="far fa-save"></i> Lưu lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+        Save();
+            $(".btnBack").click(function () {
+            location.href = "/Admin/Policy/Index/"+@ViewBag.ParentId;
+        })
+        function Save() {
+            $(document).on('click', '.btnSave', function () {
+                let policy = new Object();
+                $('.objnews input[type="text"],.objnews input[type="number"], .objnews input[type="hidden"]').each(function () {
+                    policy[$(this).attr('name')] = $(this).val();
+                });
+
+                $('.objInfor textarea').each(function () {
+                    policy[$(this).attr('name')] = $(this).val();
+                });
+                policy["Content"] = CKEDITOR.instances["Content"].getData();
+                policy["Status"] = $('#s1').is(':checked') == 1 ? 1 : 0;
+                if (CheckValidate()) {
+                    $.ajax({
+                        url: '/Admin/Policy/_AddOrUpdate',
+                    type: 'POST',
+                    dataType: 'json',
+                        data: {
+                            policy: policy
+                    },
+                    beforeSend: function () {
+                    },
+                        success: function (res) {
+                            if (res == true) {
+                            swal({
+                                title: "Thông báo",
+                                text: 'Thêm mới dữ liệu thành công.',
+                                icon: "success",
+                                dangerMode: true,
+                            }).then(() => {
+
+                            });
+                        } else {
+                            swal({
+                                title: "Thông báo",
+                                text: 'Đã xảy ra lỗi khi sửa đổi dữ liệu',
+                                icon: "warning",
+                                dangerMode: true,
+                            });
+                        }
+                    },
+                    error: function () {
+
+                    },
+                    complete: function () {
+
+                    }
+                })
+                }
+
+            });
+        }
+        })
+
+
+        function CheckValidate() {
+            let check = 0;
+            $('.text-danger').html('');
+            $('.objnews input').each(function () {
+                let value = $(this).val();
+                if (value == '') {
+                    console.log($(this));
+                    check++;
+                    let title = $(this).siblings().children('span').text();
+                    $(this).parent().siblings('.text-danger').append(title + ' không được để trống');
+                }
+                if ($(this).attr('name') == "Image" && $(this).val() == "/Upload/Image/no-image.jpg") {
+                    let title = $(this).siblings('h6').text();
+                    $(this).siblings('.text-danger').append(title + ' không được để trống');
+                    check++;
+                }
+            })
+
+            $('.objnews textarea').each(function () {
+                let value = $(this).val();
+                if (value=='' && !$(this).hasClass('ckeditor')) {
+                    check++;
+                    let title = $(this).siblings('h6').text();
+                    $(this).siblings('.text-danger').append(title + ' không được để trống');
+                }
+                else if ($(this).hasClass('ckeditor')) {
+                    value = CKEDITOR.instances[$(this).attr('id')].getData();
+                    if (value == '') {
+                        let title = $(this).siblings('h6').text();
+                        $(this).siblings('.text-danger').append(title + ' không được để trống');
+                        check++;
+                    }
+
+                }
+            })
+            return check == 0;
+        }
+    </script>
+}

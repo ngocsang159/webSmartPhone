@@ -1,0 +1,101 @@
+﻿
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 13px;
+    color: #404040;
+}
+.col-md-6{
+    width:100%;
+}
+.boxLogin {
+    width: 401px;
+    padding: 30px;
+    background: #fff;
+    text-align: center;
+    transition: 0.25s;
+    margin: 50px auto;
+    border-top: 3px solid #4285f4 !important;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    position: relative;
+}
+.panel-heading:after {
+    content: "";
+    position: absolute;
+    width: 77%;
+    height: 1px;
+    background: #d9d9d9;
+    left: 11%;
+    top: 30%;
+}
+.text-note {
+    font-size: 13px;
+    color: #333333;
+    font-weight: 600;
+}
+.frm-login{
+    margin-top:30px;
+}
+.boxLogin input[type="text"],
+.boxLogin input[type="password"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: #000;
+    font-size: 14px;
+    border-radius: 24px;
+    transition: 0.25s
+}
+
+    .box input[type="text"]:focus,
+    .box input[type="password"]:focus {
+        width: 310px;
+        border-color: #2ecc71
+    }
+.box #password:focus ~ #eye {
+    position: absolute;
+    top: 34%;
+    right: 8%;
+    transition: 0.3s;
+    background-color: #fff;
+    z-index: 1;
+}
+.frm-login .pass{
+    position:relative;
+   
+}
+#eye {
+        position: absolute;
+        top: 34%;
+        right: 16%;
+    }
+.frm-login .submit {
+    border: 0;
+    /* background-color: #2572f2;*/
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 1px solid #2ecc71;
+    padding: 10px 36px;
+    outline: none;
+    color: #000;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.frm-login .submit:hover {
+    background: #2ecc71;
+    color:#fff;
+    
+}

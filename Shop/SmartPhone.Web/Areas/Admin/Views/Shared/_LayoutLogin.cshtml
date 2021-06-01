@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> | Đăng nhập </title>
+    <link rel="icon" href="~/css/images/avatar/iconlogo1.png" type="image/x-icon"> <!-- Favicon-->
+    <!-- Bootstrap -->
+    <link href="/Admin/Content/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/Admin/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- NProgress -->
+    <!-- Animate.css -->
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/Admin/Content/dist/css/animate.min.css">
+    <link href="/Admin/Content/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="/Admin/Content/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="/Admin/Content/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="/Admin/Content/custom.min.css" rel="stylesheet">
+    <link href="/Admin/Content/login-form.css" rel="stylesheet" />
+    <link href="/Admin/Content/dist/css/alerts.less" rel="stylesheet/less" />
+
+    <!-- Latest compiled and minified CSS & JS -->
+    <script src="/Admin/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="/Admin/Content/pnotify/dist/pnotify.js"></script>
+    <script src="/Admin/Content/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="/Admin/Content/pnotify/dist/pnotify.nonblock.js"></script>
+</head>
+<body class="login" style="background-color:#eeee!important">
+
+
+    <script>
+
+        /**
+         *Xử lý sự kiện đăng nhập
+         * CreatedBY:Sanglx 01/04/2021
+         */
+
+        $(document).ready(function () {
+           
+            $("#formLogin").submit(function () {
+                console.log("adfdfd");
+                var formData = $("#formLogin").serialize();
+                debugger
+                $.ajax({
+                    url: '/Admin/Admin/Login',
+                    type: "POST",
+                    data: formData,
+                    beforeSend: function () {
+                        //new PNotify({
+                        //    title: "Thông báo",
+                        //    text: 'Bắt đầu đăng nhập',
+                        //    type: 'info',
+                        //    hide: false,
+                        //    styling: 'bootstrap3',
+                        //    delay: 500,
+                        //});
+                    }
+                }).done(function (result) {
+                    PNotify.removeAll();
+                    if (result == true) {
+                        window.location.href = '/Admin/Home/Index';
+                    //    new PNotify({
+                    //        title: "Thông báo",
+                    //        text: "Đăng nhập thành công!",
+                    //        type: 'success',
+                    //        hide: false,
+                    //        styling: 'bootstrap3'
+                    //    });
+
+                    //    new PNotify({
+                    //        title: "Thông báo",
+                    //        text: "Đang chuyển hướng",
+                    //        type: 'info',
+                    //        hide: false,
+                    //        styling: 'bootstrap3'
+                    //    });
+                        //setTimeout(function () {
+                        //    window.location.href = '/Admin/Home/Index';
+                        //}, 1000);
+                    }
+                    else {
+
+                        new PNotify({
+                            title: "Thông báo",
+                            text: "Đăng nhập không thành công!",
+                            type: 'error',
+                            hide: false,
+                            delay: 1000,
+                            styling: 'bootstrap3',
+                            
+                        });
+
+                    }
+                }).fail(function () {
+                    new PNotify({
+                        title: "Thông báo",
+                        text: "Xảy ra lỗi khi xử lý đăng nhập",
+                        type: 'error',
+                        hide: false,
+                        styling: 'bootstrap3'
+                    });
+                }).always(function () {
+                    console.log("thành công");
+                });
+                return false;
+            });
+        });
+
+    </script>
+    @RenderBody()
+    <script>
+        /**
+      * Ản hiện mật khẩu
+      * CreatedBY:Sanglx 01/04/2021
+      * */
+        var password = document.querySelector('#password');
+        console.log(password);
+        var eye = document.querySelector('#eye');
+        console.log(eye);
+
+        eye.onclick = function () {
+            if (password.type === "password") {
+                password.setAttribute("type", "text")
+                eye.classList.remove('fa-eye-slash');
+                eye.classList.add('fa-eye');
+            }
+            else {
+                password.setAttribute("type", "password")
+                eye.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
+</body>
+</html>

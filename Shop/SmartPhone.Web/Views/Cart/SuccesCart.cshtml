@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewData["Title"] = "SuccesCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Header Area End Here -->
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/"><i class="fa fa-home"></i>Trang chủ</a></li>
+                <li class="active"><a href="">Đặt hàng thành công</a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- content-wraper start -->
+<div class="content-wraper" style="padding:0!important">
+    <div class="container">
+
+        <div class="form-wrapper-oder">
+            <div class="order-wrap">
+                <div class="img-success">
+                    <img src="~/css/images/icon/success-icon-101-300x300.png" alt="sucess" />
+                </div>
+                <h2 class="success">
+                    Đặt hàng thành công
+                </h2>
+                <!-- <div class="order-code">
+                    <p>đơn hàng <span>IF4082918 </span>ĐÃ ĐƯỢC ĐẶT THÀNH CÔNG</p>
+                </div> -->
+                <div class="confirmation">
+                    <h5 class="confirmtxt">
+                        Chúng tôi sẽ liên hệ với quý khách trong thời gian sớm nhất.
+                    </h5>
+                </div>
+
+                <div class="order-note">
+                    <h5>Cảm ơn quý khách đã đặt hàng! </h5>
+                    <p>Sự hài lòng của bạn là niềm vui của cửa hàng ❤️</p>
+                </div>
+                <div class="goBackHome">
+                    <p>Quý khách sẽ được đưa về trang chủ trong ...<span id="timer" style="color:#000000"></span>..nữa</p>
+                </div>
+                <div class="border-bottom">
+                </div>
+                <div class="form-footer-order">
+                    <div class="comAddress">
+                        <p>Địa Chỉ: Mê Linh, Đông Hưng, Thái Bình</p>
+                    </div>
+                    <div class="comHotline">
+                        <p>HotLine: <span>0383 515 382</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Admin/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        var count = 5;
+        setInterval(function () {
+            count--;
+            document.getElementById('timer').innerHTML = count + 's';
+            if (count == 0) {
+                window.location.href = '/';
+            }
+        }, 1000);
+    });
+</script>
+

@@ -1,0 +1,12 @@
+E:\DO_AN\Shop\SmartPhone.Commons\bin\Debug\net5.0\SmartPhone.Commons.deps.json
+E:\DO_AN\Shop\SmartPhone.Commons\bin\Debug\net5.0\SmartPhone.Commons.dll
+E:\DO_AN\Shop\SmartPhone.Commons\bin\Debug\net5.0\ref\SmartPhone.Commons.dll
+E:\DO_AN\Shop\SmartPhone.Commons\bin\Debug\net5.0\SmartPhone.Commons.pdb
+E:\DO_AN\Shop\SmartPhone.Commons\obj\Debug\net5.0\SmartPhone.Commons.csprojAssemblyReference.cache
+E:\DO_AN\Shop\SmartPhone.Commons\obj\Debug\net5.0\SmartPhone.Commons.GeneratedMSBuildEditorConfig.editorconfig
+E:\DO_AN\Shop\SmartPhone.Commons\obj\Debug\net5.0\SmartPhone.Commons.AssemblyInfoInputs.cache
+E:\DO_AN\Shop\SmartPhone.Commons\obj\Debug\net5.0\SmartPhone.Commons.AssemblyInfo.cs
+E:\DO_AN\Shop\SmartPhone.Commons\obj\Debug\net5.0\SmartPhone.Commons.csproj.CoreCompileInputs.cache
+E:\DO_AN\Shop\SmartPhone.Commons\obj\Debug\net5.0\SmartPhone.Commons.dll
+E:\DO_AN\Shop\SmartPhone.Commons\obj\Debug\net5.0\ref\SmartPhone.Commons.dll
+E:\DO_AN\Shop\SmartPhone.Commons\obj\Debug\net5.0\SmartPhone.Commons.pdb

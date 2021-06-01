@@ -1,0 +1,263 @@
+﻿
+@{
+    ViewData["Title"] = "Quản lý màu sắc";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="show-table">
+    <div class="container-fluid">
+        <div class="showModal">
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="tableView">
+                    <div class="row p-2">
+                        <div class="utilities-top col-md-12  p-0 mb-2 justify-content-between d-flex">
+                            <div>
+                                <select class="form-control pageSize" name="display">
+                                    <option value="1">1</option>
+                                    <option value="5" selected>5</option>
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                            <div class="search d-flex">
+                                <input type="text" placeholder="Nhập tiêu đề tìm kiếm" class="searchInput form-control" style="width:250px" title="Nhập tiêu đề tìm kiếm -> Nhấn Enter">
+                                <button class="btn-primary btn-tools text-nowrap btnAdd">
+                                    <i class="fa fa-plus"></i> Thêm
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 p-0">
+                            <div class="table-view">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 p-2">
+                @await Html.PartialAsync("_AddOrUpdate")
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            let pageSize = 5;
+            let pageNumber = 1;
+
+            $('.btnAdd,.btnCancel').click(function () {
+                RefreshForm();
+                $('.text-danger').html('');
+            })
+
+            GetDataTable(pageSize, pageNumber, "");
+            AddOrUpdate();
+            SearchData();
+            ChangePageSize();
+
+            // define function
+
+            function GetDataTable(pageSize, pageNumber, Search) {
+                var getViewData = new Object();
+                getViewData["pageSize"] = pageSize;
+                getViewData["pageNumber"] = pageNumber;
+                getViewData["Search"] = Search;
+                console.log(getViewData);
+                $.ajax({
+                    url: '/Admin/Color/_TableView',
+                    type: "post",
+                    dataType: 'html',
+                    data: {
+                        getViewData: getViewData
+                    },
+                    success: function (res) {
+                        console.log(getViewData);
+                        $('.table-view').html('');
+                        $('.table-view').append(res);
+                    },
+                    error: function (error) {
+
+                    },
+                    complete: function () {
+                        RefreshForm();
+                        SetObjectToForm();
+                        DeleteById();
+                        ChangePageNumber();
+                    }
+                })
+            }
+
+            function RefreshForm() {
+                $('.objInfor input:text').each(function (index, item) {
+                    $(this).val('')
+                })
+                $('.objInfor input[type=number]').each(function (index, item) {
+                    $(this).val(0)
+                })
+            }
+
+            //action
+
+            function SetObjectToForm() {
+                $('.btnEdit').click(function () {
+                    let Id = $(this).attr('data-id');
+                    $.ajax({
+                        url: '/Admin/Color/GetColorByID',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            Id: Id
+                        },
+                        success: function (res) {
+                  
+                            $.each(res, function (key, value) {
+                                    key = key.charAt(0).toUpperCase() + key.substring(1);
+                                    $('.objInfor input[name=' + key + ']').val(value);
+                            })
+                        },
+                        error: function (error) {
+
+                        }
+                    })
+                })
+            }
+
+            function DeleteById() {
+                $('.btnDelete').click(function () {
+                    swal({
+                        title: "Xóa dữ liệu này?",
+                        text: "Dữ liệu xóa sẽ không thể khôi phục!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                let Id = $(this).attr('data-id');
+                                let btn = $(this);
+                                $.ajax({
+                                    url: '/Admin/Color/DeleteColorByID',
+                                    type: 'post',
+                                    dataType: 'json',
+                                    data: {
+                                        Id: Id
+                                    },
+                                    success: function (res) {
+                                        if (res)
+                                            btn.parent('div').parent('td').parent('tr').fadeOut();
+                                        window.location.reload();
+                                    },
+                                    error: function (error) {
+
+                                    },
+                                    complete: function () {
+                                        GetDataTable(pageSize, pageNumber, '');
+                                    }
+                                })
+                            };
+                        });
+                })
+            }
+
+            function AddOrUpdate() {
+                $('.btnSave').click(function () {
+                    debugger
+                    if (CheckValidate()) {
+                        let masterData = new Object();
+                        $('.objInfor input').each(function (index, item) {
+                            masterData[$(this).attr('name')] = $(this).val();
+                        })
+                        console.log(masterData);
+                        // submit data
+                        $.ajax({
+                            url: '/Admin/Color/AddOrUpdate',
+                            type: 'post',
+                            dataType: 'json',
+                            data: {
+                                masterData: masterData
+                            },
+                            success: function (res) {
+                                let msg = '';
+                                let msgf = '';
+                                if ($('#Id').val() == 0) {
+                                    msg = 'Đã thêm dữ liệu thành công !';
+                                    msgf = 'Đã thêm dữ liệu thất bại !';
+
+                                }
+                                else {
+                                    msg = 'Đã sửa dữ liệu thành công !';
+                                    msgf = 'Đã sửa dữ liệu thất bại !';
+                                }
+                                if (res) {
+                                    var t = toastr.success(msg);
+                                    t.show();
+                                }
+                                else {
+                                    var t = toastr.warning(msgf);
+                                    t.show();
+                                }
+                            },
+                            error: function (error) {
+                            },
+
+                            complete: function () {
+                                GetDataTable(pageSize, pageNumber, '');
+                                RefreshForm();
+                            }
+                        })
+                    }
+                    // get data
+                })
+            }
+
+            function CheckValidate() {
+                debugger
+                let check = 0;
+                $('.text-danger').html('');
+                $('.objInfor input').each(function () {
+                    let value = $(this).val();
+                    console.log(value);
+                    if (value == '') {
+                        check++;
+                        let title = $(this).siblings('label').text();
+                        $(this).siblings('.text-danger').append(title + ' không được để trống');
+                    }
+                })
+                return check == 0;
+            }
+
+            // change view data
+
+            function SearchData() {
+                $('.searchInput').keyup(function () {
+                    let search = $(this).val();
+                    search = search.trim();
+                    GetDataTable(pageSize, 1 , search);
+                })
+            }
+
+            function ChangePageNumber() {
+                $('.pagination li a').click(function () {
+                    pageNumber = $(this).attr('data-index');
+                    let search = $('.searchInput').val().trim();
+                    GetDataTable(pageSize, pageNumber , search);
+                })
+            }
+
+            function ChangePageSize() {
+                $('.pageSize').change(function () {
+                    pageSize = $(this).val();
+                    let search = $('.searchInput').val().trim();
+                    GetDataTable(pageSize, 1, search);
+                })
+            }
+        })
+    </script>
+}
+

@@ -1,0 +1,9 @@
+﻿@model IEnumerable<SmartPhone.Models.EF.Product>
+@{
+    ViewData["Title"] = "GetListProductBySearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listCategory = ViewBag.listCategory as IEnumerable<SmartPhone.Models.EF.CategoryProduct>;
+}
+
+
+

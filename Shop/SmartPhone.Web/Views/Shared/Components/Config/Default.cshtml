@@ -1,0 +1,167 @@
+﻿@model List<SmartPhone.Models.EF.Config>;
+@using SmartPhone.Models.ViewModel;
+@{
+    var lstPolicy = ViewBag.GetPolicy as IEnumerable<PolicyViewModel>;
+}
+<div class="footer-static-middle">
+    <div class="container">
+        <div class="footer-logo-wrap pt-30 pb-30">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <!-- Begin Footer Logo Area -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-logo">
+                            <img src="@item.Logo" alt="LanHang Logo">
+                            <p class="info">
+                                "@item.Description"
+                            </p>
+                        </div>
+                        <ul class="des">
+                            <li>
+                                <img src="~/css/images/icon/ft1.png" />
+                                <span>Địa Chỉ: </span>
+                                @item.Address
+                            </li>
+                            <li>
+                                <img src="~/css/images/icon/ft2.png" />
+                                <span>Số điện Thoại: </span>
+                                <a href="#">@item.Phone</a>
+                            </li>
+                            <li>
+                                <img src="~/css/images/icon/ft3.png" />
+                                <span>Email: </span>
+                                <a href="">@item.Email</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Footer Logo Area End Here -->
+                    <!-- Begin Footer Block Area -->
+                    <div class="col-lg-2 col-md-3 col-sm-6">
+                        <div class="footer-block">
+                            <h3 class="footer-block-title">Chính Sách</h3>
+                            <ul>
+                                @foreach (var lst in lstPolicy)
+                                {
+                                    <li><a href="/chinh-sach/@lst.policy.Slug/@lst.policy.Id">@lst.policy.Name</a></li>
+                                }
+
+                                <li><a href="#">Laptops</a></li>
+                                <li><a href="#">Tivi</a></li>
+                                <li><a href="#">Phụ Kiện</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Footer Block Area End Here -->
+                    <!-- Begin Footer Block Area -->
+                    <div class="col-lg-2 col-md-3 col-sm-6">
+                        <div class="footer-block">
+                            <h3 class="footer-block-title">Hỗ Trợ</h3>
+                            <ul>
+                                <li><a href="#">Liên Hệ</a></li>
+                                <li><a href="#">Hỗ Trợ Dịch Vụ</a></li>
+                                <li><a href="#">Hỗ Trợ Trực Tuyến</a></li>
+                                <li><a href="#">Trung Tâm Bảo Hành</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Footer Block Area End Here -->
+                    <!-- Begin Footer Block Area -->
+                    <div class="col-lg-4">
+                        <div class="footer-block-all">
+                            <div class="footer-block">
+                                <h3 class="footer-block-title">Theo Dõi</h3>
+                                <ul class="social-link">
+                                    <li class="list-social">
+                                        <a href="@item.Facebook" title="Youtube" class="">
+                                            <img src="~/css/images/icon/youtube.png" />
+                                        </a>
+                                        <a href="@item.Facebook" title="Facebook">
+
+                                            <img src="~/css/images/icon/facebook.png" />
+                                        </a>
+                                    </li>
+                                    <li class="list-social">
+                                        <a href="@item.Zalo" title="Zalo">
+                                            <img src="~/css/images/icon/zalo1.png" />
+                                        </a>
+
+                                        <a href="@item.Zalo" title="instagram">
+                                            <img src="~/css/images/icon/instagram.png" />
+
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="footer-block">
+                                <h3 class="footer-block-title">Thanh toán</h3>
+                                <ul class="social-link">
+                                    <li class="list-pay">
+
+                                        <img src="~/css/images/icon/logo-atm.png" />
+                                        <img src="~/css/images/icon/logo-master.png" />
+                                    </li>
+                                    <li class="list-pay">
+                                        <img src="~/css/images/icon/logo-visa.png" />
+                                        <img src="~/css/images/icon/logo-vnpay.png" />
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Footer Links Area End Here -->
+                        <!-- Begin Footer Payment Area -->
+                        <!-- Begin Footer Newsletter Area -->
+                        <div class="footer-newsletter">
+                            <h4>Bản đồ</h4>
+                            <div style="overflow: hidden;width: 100%; position: relative;">
+                                @Html.Raw(item.Map)
+                                <div style="position: absolute; width: 80%; bottom: 10px; left: 0;; right: 0; margin-left: auto; color: #000; text-align: center;">
+                                    <small style="line-height: 1.8; font-size: 2px; background: #fff;"><a href="https://embedgooglemaps.com/es/">Embedgooglemaps ES</a> & <a href="https://www.hostsearch.com/">buy targeted web traffic that converts</a></small>
+                                </div>
+                                <style>
+                                    #gmap_canvas img {
+                                        max-width: none !important;
+                                        background: none !important
+                                    }
+                                </style>
+                            </div><br />
+
+                        </div>
+                        <!-- Footer Newsletter Area End Here -->
+                    </div>
+                    <!-- Footer Block Area End Here -->
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer Static Middle Area End Here -->
+<!-- Begin Footer Static Bottom Area -->
+<div class="footer-static-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Begin Footer Links Area -->
+                <!-- Footer Payment Area End Here -->
+                <!-- Begin Copyright Area -->
+                <div class="copyright text-center pt-20 pb-20">
+                    <span>Bản quyền ©2020-2021 Trung tâm điện thoại di động Lan Hằng bảo lưu mọi quyền</span>
+                    <br>
+                    <span>Địa chỉ: Mê Linh, Đông Hưng, Thái Bình</span>
+                    <br>
+                    <span>
+                        <a href="https://www.templatespoint.net" target="_blank">
+                            Designed By:<strong>NVSANG</strong>  &#64 nguyenngocsang1591999@gmail.com
+                        </a>
+                    </span>
+                </div>
+                <!-- Copyright Area End Here -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer Static Bottom Area End Here -->

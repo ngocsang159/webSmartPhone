@@ -1,0 +1,26 @@
+﻿@model List<SmartPhone.Models.EF.Footer>
+<div class="footer-static-top footer-static-top-3 pt-xs-50 pb-xs-10">
+    <div class="container">
+        <!-- Begin Footer Shipping Area -->
+        <div class="footer-shipping pb-xs-0">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <!-- Begin Li's Shipping Inner Box Area -->
+                    <div class="col-lg-3 col-md-3 col-sm-6 pb-xs-45 footer-item">
+                        <div class="li-shipping-inner-box">
+                                <img src="@item.Image" alt="@item.Name">
+                            <div class="shipping-text">
+                                <h2>@item.Name</h2>
+                                <span>@item.Description</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Li's Shipping Inner Box Area End Here -->
+                    <!-- Begin Li's Shipping Inner Box Area -->
+                }
+            </div>
+        </div>
+        <!-- Footer Shipping Area End Here -->
+    </div>
+</div>

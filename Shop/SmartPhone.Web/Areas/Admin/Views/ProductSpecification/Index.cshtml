@@ -1,0 +1,360 @@
+﻿@model SmartPhone.Models.EF.ProductSpecification;
+@{
+    ViewData["Title"] = "Thông số kỹ thuật";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .input-group-prepend, .input-group-prepend > span {
+        width: 180px !important;
+    }
+
+    .form-group label {
+        cursor: pointer;
+    }
+
+    h6 span {
+        color: #495057;
+        font-size: 1.1rem;
+        font-weight: 400;
+        line-height: 1.2;
+        padding: 2rem 0rem;
+    }
+</style>
+
+
+
+<div class="show-table">
+    <div class="container-fluid objInfor pl-3 pr-3">
+        <div class="showModal">
+            <!--Xem chi tiết -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-1 objnews">
+            
+            <input type="hidden" name="ID" value="@Model.Id" id="ID" />
+            <div class="col-md-9 mb-1">
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Tên bài viết</span>
+                        </div>
+                        <input type="text" name="Name" class="form-control" id="Name" value="@Model.Name" maxlength="250">
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Thiết kế</span>
+                        </div>
+                        <input type="text" name="Design" class="form-control" value="@Model.Design" maxlength="250">
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Kích thước</span>
+                        </div>
+                        <input type="text" name="Size" class="form-control" value="@Model.Size" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Màn hình</span>
+                        </div>
+                        <input type="text" name="Screen" class="form-control" value="@Model.Screen" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Độ phân giải màn hình</span>
+                        </div>
+                        <input type="text" name="ScreenResolution" class="form-control" value="@Model.ScreenResolution" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Màn hình rộng</span>
+                        </div>
+                        <input type="text" name="WideScreen" class="form-control" value="@Model.WideScreen" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Camera sau</span>
+                        </div>
+                        <input type="text" name="CameraRear" class="form-control" value="@Model.CameraRear" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Camera selfie</span>
+                        </div>
+                        <input type="text" name="CameraSelfie" id="CameraSelfie" class="form-control" value="@Model.CameraSelfie" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">RAM</span>
+                        </div>
+                        <input type="text" name="Ram" class="form-control" value="@Model.Ram" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Bộ nhớ trong</span>
+                        </div>
+                        <input type="text" name="Memory" class="form-control" value="@Model.Memory" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Thẻ nhớ SD</span>
+                        </div>
+                        <input type="text" name="CardMemory" class="form-control" value="@Model.CardMemory" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">CPU</span>
+                        </div>
+                        <input type="text" name="Cpu" class="form-control" value="@Model.Cpu" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Tốc độ CPU</span>
+                        </div>
+                        <input type="text" name="SpeedCpu" class="form-control" value="@Model.SpeedCpu" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">GPU</span>
+                        </div>
+                        <input type="text" name="Gpu" class="form-control" value="@Model.Gpu" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Dung lượng pin</span>
+                        </div>
+                        <input type="text" name="Battery" class="form-control" value="@Model.Battery" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Cáp sạc</span>
+                        </div>
+                        <input type="text" name="ChargingPort" class="form-control" value="@Model.ChargingPort" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Thẻ SIM</span>
+                        </div>
+                        <input type="text" name="Sim" class="form-control" value="@Model.Sim" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Mạng kết nối</span>
+                        </div>
+                        <input type="text" name="Network" class="form-control" value="@Model.Network" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Jack cắm tai nghe</span>
+                        </div>
+                        <input type="text" name="JackHeadphone" id="JackHeadphone" class="form-control" value="@Model.JackHeadphone" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Hệ điều hành</span>
+                        </div>
+                        <input type="text" name="Os" class="form-control" id="Os" value="@Model.Os" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Sản xuất tại</span>
+                        </div>
+                        <input type="text" name="MadeIn" class="form-control" value="@Model.MadeIn" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Thời gian</span>
+                        </div>
+                        <input type="date" name="LaunchTime" class="form-control" value="@Model.LaunchTime" />
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+                <div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Trạng thái</span>
+                        </div>
+
+                        <input type="radio" name="Status" id="s1" data-value="1" value="@Model.Status" class="ml-4" checked /> <label for="s1" class="mt-1 ml-2">Hoạt động</label>
+                        <input type="radio" name="Status" id="s2" data-value="0" value="@Model.Status" class="ml-4" /> <label for="s2" class="mt-1 ml-2">Đang khóa</label>
+
+
+                    </div>
+                    <div class="text-danger"></div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row mb-3">
+                    <div class="col-md-12 text-right mr-0 pr-0 mt-1 mb-5 modal-footer">
+                        <button type="button" class="btn btn btn-red btnRefresh" ><i class="fas fa-reply-all"></i>Quay lại</button>
+                        <button type="button" class="btn btn-green btnSave" onclick=""> <i class="far fa-save"></i> Ghi lại</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+            $(document).ready(function () {
+                Save();
+                RefreshForm();
+                @*$(".btnBack").click(function () {
+
+                location.href = "/Admin/Product/Index/"+ @ViewBag.ProductId;
+            })*@
+                function Save() {
+                    $(document).on('click', '.btnSave', function () {
+                        let specification = new Object();
+                        $('.objnews input[type="text"],.objnews input[type="number"], .objnews input[type="hidden"],.objnews input[type="date"]').each(function () {
+                            specification[$(this).attr('name')] = $(this).val();
+                        });
+                        specification["Status"] = $('#s1').is(':checked') == 1 ? 1 : 0;
+
+
+                            $.ajax({
+                                url: '/Admin/ProductSpecification/Edit',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {
+                                    productSpecification: specification
+                                },
+                                beforeSend: function () {
+                                },
+                                success: function (res) {
+                                    if (res == true) {
+                                        swal({
+                                            title: "Thông báo",
+                                            text: 'Chỉnh sửa dữ liệu thành công.',
+                                            icon: "success",
+                                            dangerMode: true,
+                                        }).then(() => {
+
+                                        });
+                                    } else {
+                                        swal({
+                                            title: "Thông báo",
+                                            text: 'Đã xảy ra lỗi khi sửa đổi dữ liệu',
+                                            icon: "warning",
+                                            dangerMode: true,
+                                        });
+                                    }
+                                },
+                                error: function () {
+
+                                },
+                                complete: function () {
+                               
+                                }
+                            })
+
+                    });
+                }
+                function RefreshForm() {
+                    $(document).on('click', '.btnRefresh', function () {
+                        $('.objInfor input:text').each(function (index, item) {
+                            $(this).val('')
+                        })
+                        $('.objInfor input[type=number]').each(function (index, item) {
+                            $(this).val(0)
+                        })
+                    })
+           
+                };
+            })
+    </script>
+    }
+
+
